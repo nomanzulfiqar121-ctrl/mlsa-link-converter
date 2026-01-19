@@ -13,23 +13,33 @@
         body {
             font-family: 'Segoe UI', sans-serif;
             margin: 0;
+            padding: 20px 0;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             background: #000;
+            color: white;
         }
         .card {
             background: #111;
-            padding: 35px 25px;
+            padding: 30px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,120,212,0.15);
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
             text-align: center;
             border: 1px solid #333;
         }
-        h1 { color: white; margin-bottom: 20px; font-size: 22px; }
+        .instruction-box {
+            background: rgba(0, 120, 212, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            text-align: left;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        .instruction-box h3 { font-size: 14px; margin-top: 0; color: var(--primary-color); text-transform: uppercase; }
+        .instruction-box ol { font-size: 13px; margin: 0; padding-left: 20px; color: #ccc; }
+        
         .input-group { text-align: left; margin-bottom: 15px; }
         label { color: #aaa; font-size: 12px; font-weight: bold; margin-bottom: 5px; display: block; }
         input {
@@ -40,9 +50,7 @@
             border-radius: 8px;
             color: white;
             box-sizing: border-box;
-            font-size: 14px;
         }
-        input:focus { border-color: var(--primary-color); outline: none; }
         .btn {
             width: 100%;
             padding: 15px;
@@ -52,7 +60,6 @@
             border-radius: 10px;
             font-weight: bold;
             cursor: pointer;
-            text-transform: uppercase;
             margin-top: 10px;
         }
         #result-box {
@@ -64,18 +71,38 @@
             border: 1px dashed var(--primary-color);
         }
         .final-url { color: #00c2ff; word-break: break-all; font-size: 13px; margin-bottom: 15px; }
-        footer { margin-top: 35px; border-top: 1px solid #222; padding-top: 20px; }
-        .made-by { color: #555; font-size: 12px; margin-bottom: 10px; }
-        .social-links a { color: #fff; text-decoration: none; font-size: 12px; font-weight: bold; letter-spacing: 1px; }
+        
+        .links-section {
+            margin-top: 30px;
+            text-align: left;
+            font-size: 13px;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+        }
+        .links-section h4 { color: #eee; margin-bottom: 10px; }
+        .links-section ul { color: #888; padding-left: 20px; }
+
+        footer { margin-top: 30px; border-top: 1px solid #222; padding-top: 15px; }
+        .social-links a { color: #fff; text-decoration: none; font-size: 12px; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h1>MLSA Converter</h1>
-    
+    <h1 style="font-size: 26px; margin-bottom: 5px;">Opty <span style="font-weight: 300; font-size: 18px; color: #777;">| Converter</span></h1>
+    <p style="color: #666; font-size: 13px; margin-bottom: 25px;">Microsoft Learn Student Ambassadors Tool</p>
+
+    <div class="instruction-box">
+        <h3>Instructions</h3>
+        <ol>
+            <li>Copy the full Microsoft Learn URL.</li>
+            <li>Enter your 6-digit Contributor ID.</li>
+            <li>Paste the URL and generate your link.</li>
+        </ol>
+    </div>
+
     <div class="input-group">
-        <label>CONTRIBUTOR ID (6-digit)</label>
+        <label>CONTRIBUTOR ID</label>
         <input type="text" id="idInput" placeholder="e.g. 502891">
     </div>
 
@@ -84,7 +111,7 @@
         <input type="text" id="urlInput" placeholder="https://learn.microsoft.com/...">
     </div>
     
-    <button class="btn" onclick="generateLink()">Generate Tracking Link</button>
+    <button class="btn" onclick="generateLink()">GENERATE TRACKING LINK</button>
 
     <div id="result-box">
         <label>YOUR CUSTOM LINK:</label>
@@ -92,8 +119,18 @@
         <button onclick="copyLink()" style="background:white; color:black; border:none; padding:8px 15px; border-radius:5px; cursor:pointer; font-weight:bold;">COPY</button>
     </div>
 
+    <div class="links-section">
+        <h4>Eligible Reference URLs</h4>
+        <ul>
+            <li>learn.microsoft.com</li>
+            <li>developer.microsoft.com</li>
+            <li>azure.microsoft.com</li>
+            <li>social.technet.microsoft.com</li>
+        </ul>
+    </div>
+
     <footer>
-        <div class="made-by">Made with ❤️ by <span style="color:#0078d4">Noman Zulfiqar</span></div>
+        <div style="color: #555; font-size: 12px; margin-bottom: 10px;">Made with ❤️ by <span style="color:#0078d4">Noman Zulfiqar</span></div>
         <div class="social-links">
             <a href="https://www.linkedin.com/in/noman-zulfiqar-0916833a4" target="_blank">
                 <i class="fab fa-linkedin"></i> LINKEDIN
@@ -106,23 +143,16 @@
     function generateLink() {
         const id = document.getElementById('idInput').value.trim();
         const url = document.getElementById('urlInput').value.trim();
-        
-        if (!id || !url) {
-            alert("Bhai, ID aur Link dono daalna lazmi hai!");
-            return;
-        }
-
+        if (!id || !url) { alert("Please fill both ID and URL!"); return; }
         const separator = url.includes('?') ? '&' : '?';
         const finalUrl = `${url}${separator}wt.mc_id=studentamb_${id}`;
-        
         document.getElementById('finalLink').innerText = finalUrl;
         document.getElementById('result-box').style.display = 'block';
     }
-
     function copyLink() {
         const linkText = document.getElementById('finalLink').innerText;
         navigator.clipboard.writeText(linkText);
-        alert("Link copied!");
+        alert("Link Copied!");
     }
 </script>
 
