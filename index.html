@@ -96,11 +96,10 @@
             background: #121416;
             border-radius: 12px;
             display: none;
-            border: 1px dashed #0078d4;
+            border: 1px solid #0078d4;
         }
         .final-url { color: #00c2ff; word-break: break-all; font-size: 13px; margin-bottom: 15px; }
 
-        /* Added Eligible Reference URLs Section */
         .links-section {
             margin-top: 30px;
             text-align: left;
@@ -108,11 +107,11 @@
             border-top: 1px solid #33383e;
             padding-top: 20px;
         }
-        .links-section h4 { color: #bdc3c7; margin-bottom: 10px; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; }
+        .links-section h4 { color: #bdc3c7; margin-bottom: 10px; text-transform: uppercase; font-size: 11px; }
         .links-section ul { color: #666; padding-left: 20px; margin: 0; }
-        .links-section li { margin-bottom: 4px; }
 
         footer { margin-top: 30px; border-top: 1px solid #33383e; padding-top: 20px; }
+        .dev-credit { color: #555; font-size: 11px; margin-bottom: 10px; letter-spacing: 1px; }
         .social-links a { color: #8892b0; text-decoration: none; font-size: 12px; font-weight: bold; }
         .social-links a:hover { color: #0078d4; }
     </style>
@@ -128,7 +127,7 @@
     <div class="instruction-box">
         <h3>How to use:</h3>
         <ol>
-            <li>Copy your Microsoft Learn URL.</li>
+            <li>Paste your Microsoft Learn URL.</li>
             <li>Enter your 6-digit Contributor ID.</li>
             <li>Convert and share your link!</li>
         </ol>
@@ -158,11 +157,11 @@
             <li>learn.microsoft.com</li>
             <li>developer.microsoft.com</li>
             <li>azure.microsoft.com</li>
-            <li>social.technet.microsoft.com</li>
         </ul>
     </div>
 
     <footer>
+        <div class="dev-credit">Designed and Developed by Noman Zulfiqar</div>
         <div class="social-links">
             <a href="https://www.linkedin.com/in/noman-zulfiqar-0916833a4" target="_blank">
                 <i class="fab fa-linkedin"></i> CONNECT ON LINKEDIN
@@ -175,7 +174,7 @@
     function generateLink() {
         const id = document.getElementById('idInput').value.trim();
         const url = document.getElementById('urlInput').value.trim();
-        if (!id || !url) { alert("Please fill both fields!"); return; }
+        if (!id || !url) { alert("Dono boxes bharna zaroori hain!"); return; }
         const separator = url.includes('?') ? '&' : '?';
         const finalUrl = `${url}${separator}wt.mc_id=studentamb_${id}`;
         document.getElementById('finalLink').innerText = finalUrl;
@@ -184,7 +183,7 @@
     function copyLink() {
         const linkText = document.getElementById('finalLink').innerText;
         navigator.clipboard.writeText(linkText);
-        alert("Link Copied!");
+        alert("Link Copy Ho Gaya!");
     }
 </script>
 
