@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLSA Link Converter</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding: 40px; background-color: #f4f4f4; }
+        .container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); display: inline-block; max-width: 90%; }
+        input { padding: 12px; width: 80%; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 12px 25px; background-color: #0078d4; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #005a9e; }
+        #result { margin-top: 20px; word-break: break-all; color: #0078d4; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>MLSA Link Converter</h2>
+        <p>Paste your Microsoft Learn link below:</p>
+        <input type="text" id="url" placeholder="https://learn.microsoft.com/...">
+        <br>
+        <button onclick="convert()">Generate Referral Link</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function convert() {
+            let url = document.getElementById('url').value;
+            let ambassadorID = "502891"; 
+            if(url) {
+                // Check if URL already has a query string
+                let separator = url.includes('?') ? '&' : '?';
+                let finalLink = url + separator + "wt.mc_id=studentamb_" + ambassadorID;
+                document.getElementById('result').innerHTML = `<strong>Your Link:</strong><br><a href="${finalLink}" target="_blank">${finalLink}</a>`;
+            } else {
+                alert("Please paste a URL first!");
+            }
+        }
+    </script>
+</body>
+  </html>
+  
