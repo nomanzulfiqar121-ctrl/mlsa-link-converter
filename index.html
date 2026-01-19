@@ -17,11 +17,11 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: #000; /* Dark background like Opty */
+            background: #000;
         }
         .card {
             background: #111;
-            padding: 40px 30px;
+            padding: 35px 25px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,120,212,0.15);
             width: 100%;
@@ -29,17 +29,17 @@
             text-align: center;
             border: 1px solid #333;
         }
-        h1 { color: white; margin-bottom: 8px; font-size: 24px; }
-        p { color: #888; font-size: 14px; margin-bottom: 25px; }
+        h1 { color: white; margin-bottom: 20px; font-size: 22px; }
+        .input-group { text-align: left; margin-bottom: 15px; }
+        label { color: #aaa; font-size: 12px; font-weight: bold; margin-bottom: 5px; display: block; }
         input {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             background: #1a1a1a;
             border: 1px solid #444;
-            border-radius: 10px;
+            border-radius: 8px;
             color: white;
             box-sizing: border-box;
-            margin-bottom: 15px;
             font-size: 14px;
         }
         input:focus { border-color: var(--primary-color); outline: none; }
@@ -53,10 +53,8 @@
             font-weight: bold;
             cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
+            margin-top: 10px;
         }
-        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
         #result-box {
             margin-top: 25px;
             padding: 15px;
@@ -65,57 +63,37 @@
             display: none;
             border: 1px dashed var(--primary-color);
         }
-        .final-url { color: #00c2ff; word-break: break-all; font-size: 13px; margin-bottom: 15px; font-weight: 500; }
-        .copy-btn {
-            background: white;
-            color: black;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 12px;
-        }
-        
-        /* Footer with only LinkedIn */
-        footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #222;
-        }
-        .made-by { color: #555; font-size: 12px; margin-bottom: 15px; }
-        .noman-name { color: var(--primary-color); font-weight: bold; }
-        .social-links a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.3s;
-        }
-        .social-links a:hover { color: var(--primary-color); }
+        .final-url { color: #00c2ff; word-break: break-all; font-size: 13px; margin-bottom: 15px; }
+        footer { margin-top: 35px; border-top: 1px solid #222; padding-top: 20px; }
+        .made-by { color: #555; font-size: 12px; margin-bottom: 10px; }
+        .social-links a { color: #fff; text-decoration: none; font-size: 12px; font-weight: bold; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
 <div class="card">
     <h1>MLSA Converter</h1>
-    <p>Convert Microsoft Learn links with your ID</p>
-
-    <input type="text" id="urlInput" placeholder="Paste link here...">
     
-    <button class="btn" onclick="generateLink()">Convert Link</button>
+    <div class="input-group">
+        <label>CONTRIBUTOR ID (6-digit)</label>
+        <input type="text" id="idInput" placeholder="e.g. 502891">
+    </div>
+
+    <div class="input-group">
+        <label>MICROSOFT LEARN LINK</label>
+        <input type="text" id="urlInput" placeholder="https://learn.microsoft.com/...">
+    </div>
+    
+    <button class="btn" onclick="generateLink()">Generate Tracking Link</button>
 
     <div id="result-box">
+        <label>YOUR CUSTOM LINK:</label>
         <div id="finalLink" class="final-url"></div>
-        <button class="copy-btn" onclick="copyLink()">COPY LINK</button>
+        <button onclick="copyLink()" style="background:white; color:black; border:none; padding:8px 15px; border-radius:5px; cursor:pointer; font-weight:bold;">COPY</button>
     </div>
 
     <footer>
-        <div class="made-by">Made with ❤️ by <span class="noman-name">Noman Zulfiqar</span></div>
+        <div class="made-by">Made with ❤️ by <span style="color:#0078d4">Noman Zulfiqar</span></div>
         <div class="social-links">
             <a href="https://www.linkedin.com/in/noman-zulfiqar-0916833a4" target="_blank">
                 <i class="fab fa-linkedin"></i> LINKEDIN
@@ -126,11 +104,17 @@
 
 <script>
     function generateLink() {
+        const id = document.getElementById('idInput').value.trim();
         const url = document.getElementById('urlInput').value.trim();
-        const ambassadorID = "502891"; 
-        if (!url) { alert("Please paste a link first!"); return; }
+        
+        if (!id || !url) {
+            alert("Bhai, ID aur Link dono daalna lazmi hai!");
+            return;
+        }
+
         const separator = url.includes('?') ? '&' : '?';
-        const finalUrl = `${url}${separator}wt.mc_id=studentamb_${ambassadorID}`;
+        const finalUrl = `${url}${separator}wt.mc_id=studentamb_${id}`;
+        
         document.getElementById('finalLink').innerText = finalUrl;
         document.getElementById('result-box').style.display = 'block';
     }
@@ -138,7 +122,7 @@
     function copyLink() {
         const linkText = document.getElementById('finalLink').innerText;
         navigator.clipboard.writeText(linkText);
-        alert("Link copied to clipboard!");
+        alert("Link copied!");
     }
 </script>
 
