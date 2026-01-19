@@ -9,7 +9,9 @@
     <style>
         :root {
             --primary-color: #0078d4;
-            --bg-gradient: linear-gradient(135deg, #ffffff 0%, #a1a1a1 100%);
+            --bg-color: #1a1c1e; 
+            --card-color: #25282c; 
+            --input-bg: #121416;
         }
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -17,102 +19,102 @@
             padding: 20px 0;
             display: flex;
             justify-content: center;
-            background: #000;
+            background: var(--bg-color);
             color: white;
         }
         .card {
-            background: #111;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(255,255,255,0.05);
+            background: var(--card-color);
+            padding: 35px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
             width: 100%;
             max-width: 450px;
             text-align: center;
-            border: 1px solid #222;
+            border: 1px solid #33383e;
         }
         
-        /* Image jaisa Calligraphy Header */
-        .logo-section {
-            margin-bottom: 30px;
-        }
+        .logo-section { margin-bottom: 35px; }
         .arabic-style {
             font-family: 'Great Vibes', cursive;
-            font-size: 70px;
+            font-size: 75px;
             line-height: 1;
-            margin-bottom: -15px;
-            background: linear-gradient(to bottom, #ffffff, #888);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: -10px;
+            color: #ffffff;
             display: block;
         }
         .english-name {
             font-family: 'Cinzel', serif;
-            font-size: 24px;
-            letter-spacing: 8px;
-            color: #fff;
+            font-size: 22px;
+            letter-spacing: 10px;
+            color: #0078d4;
             text-transform: uppercase;
-            border-top: 1px solid #333;
             padding-top: 10px;
             display: inline-block;
         }
 
         .instruction-box {
-            background: rgba(255, 255, 255, 0.05);
-            border-left: 3px solid #fff;
+            background: rgba(0, 120, 212, 0.08);
+            border-radius: 12px;
             padding: 15px;
             text-align: left;
             margin-bottom: 25px;
-            border-radius: 4px;
+            border: 1px solid rgba(0, 120, 212, 0.2);
         }
-        .instruction-box h3 { font-size: 12px; margin: 0 0 5px 0; color: #888; text-transform: uppercase; }
-        .instruction-box ol { font-size: 13px; margin: 0; padding-left: 20px; color: #bbb; }
+        .instruction-box h3 { font-size: 13px; margin: 0 0 8px 0; color: #00c2ff; }
+        .instruction-box ol { font-size: 13px; margin: 0; padding-left: 18px; color: #bdc3c7; }
         
-        .input-group { text-align: left; margin-bottom: 15px; }
-        label { color: #666; font-size: 10px; font-weight: bold; margin-bottom: 5px; display: block; letter-spacing: 2px; }
+        .input-group { text-align: left; margin-bottom: 18px; }
+        label { color: #8892b0; font-size: 11px; font-weight: bold; margin-bottom: 6px; display: block; letter-spacing: 1.5px; }
         input {
             width: 100%;
             padding: 14px;
-            background: #000;
-            border: 1px solid #333;
-            border-radius: 8px;
+            background: var(--input-bg);
+            border: 1px solid #3d444d;
+            border-radius: 10px;
             color: white;
             box-sizing: border-box;
             transition: 0.3s;
         }
-        input:focus { border-color: #fff; outline: none; }
+        input:focus { border-color: var(--primary-color); outline: none; }
         
         .btn {
             width: 100%;
             padding: 16px;
-            background: #fff;
-            color: #000;
+            background: linear-gradient(135deg, #0078d4 0%, #00c2ff 100%);
+            color: white;
             border: none;
-            border-radius: 8px;
-            font-weight: 800;
+            border-radius: 12px;
+            font-weight: bold;
             cursor: pointer;
             margin-top: 10px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
+
         #result-box {
             margin-top: 25px;
-            padding: 15px;
-            background: #1a1a1a;
-            border-radius: 10px;
+            padding: 20px;
+            background: #121416;
+            border-radius: 12px;
             display: none;
-            border: 1px solid #333;
+            border: 1px dashed #0078d4;
         }
-        .final-url { color: #0078d4; word-break: break-all; font-size: 13px; margin-bottom: 15px; }
-        
-        footer { margin-top: 40px; border-top: 1px solid #222; padding-top: 20px; }
-        .social-links a { 
-            color: #888; 
-            text-decoration: none; 
-            font-size: 12px; 
-            font-weight: bold; 
-            letter-spacing: 2px;
+        .final-url { color: #00c2ff; word-break: break-all; font-size: 13px; margin-bottom: 15px; }
+
+        /* Added Eligible Reference URLs Section */
+        .links-section {
+            margin-top: 30px;
+            text-align: left;
+            font-size: 12px;
+            border-top: 1px solid #33383e;
+            padding-top: 20px;
         }
-        .social-links a:hover { color: #fff; }
+        .links-section h4 { color: #bdc3c7; margin-bottom: 10px; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; }
+        .links-section ul { color: #666; padding-left: 20px; margin: 0; }
+        .links-section li { margin-bottom: 4px; }
+
+        footer { margin-top: 30px; border-top: 1px solid #33383e; padding-top: 20px; }
+        .social-links a { color: #8892b0; text-decoration: none; font-size: 12px; font-weight: bold; }
+        .social-links a:hover { color: #0078d4; }
     </style>
 </head>
 <body>
@@ -124,30 +126,40 @@
     </div>
 
     <div class="instruction-box">
-        <h3>Quick Guide</h3>
+        <h3>How to use:</h3>
         <ol>
-            <li>Get your Microsoft Learn URL.</li>
-            <li>Enter your Contributor ID.</li>
-            <li>Convert and Copy.</li>
+            <li>Copy your Microsoft Learn URL.</li>
+            <li>Enter your 6-digit Contributor ID.</li>
+            <li>Convert and share your link!</li>
         </ol>
     </div>
 
     <div class="input-group">
-        <label>CONTRIBUTOR ID</label>
-        <input type="text" id="idInput" placeholder="502891">
+        <label>YOUR CONTRIBUTOR ID</label>
+        <input type="text" id="idInput" placeholder="Enter ID (e.g. 502891)">
     </div>
 
     <div class="input-group">
-        <label>PASTE LINK HERE</label>
-        <input type="text" id="urlInput" placeholder="https://learn.microsoft.com/...">
+        <label>MICROSOFT LEARN LINK</label>
+        <input type="text" id="urlInput" placeholder="Paste link here...">
     </div>
     
-    <button class="btn" onclick="generateLink()">Generate Tracking Link</button>
+    <button class="btn" onclick="generateLink()">Create My Link</button>
 
     <div id="result-box">
-        <label style="color:#555">CONVERTED LINK:</label>
+        <label style="color:#8892b0">READY LINK:</label>
         <div id="finalLink" class="final-url"></div>
-        <button onclick="copyLink()" style="background:#0078d4; color:white; border:none; padding:8px 20px; border-radius:4px; cursor:pointer; font-weight:bold;">COPY URL</button>
+        <button onclick="copyLink()" style="background:#fff; color:#000; border:none; padding:10px 25px; border-radius:8px; cursor:pointer; font-weight:bold;">COPY URL</button>
+    </div>
+
+    <div class="links-section">
+        <h4>Eligible Reference URLs</h4>
+        <ul>
+            <li>learn.microsoft.com</li>
+            <li>developer.microsoft.com</li>
+            <li>azure.microsoft.com</li>
+            <li>social.technet.microsoft.com</li>
+        </ul>
     </div>
 
     <footer>
@@ -163,7 +175,7 @@
     function generateLink() {
         const id = document.getElementById('idInput').value.trim();
         const url = document.getElementById('urlInput').value.trim();
-        if (!id || !url) { alert("Please enter both ID and URL."); return; }
+        if (!id || !url) { alert("Please fill both fields!"); return; }
         const separator = url.includes('?') ? '&' : '?';
         const finalUrl = `${url}${separator}wt.mc_id=studentamb_${id}`;
         document.getElementById('finalLink').innerText = finalUrl;
@@ -172,7 +184,7 @@
     function copyLink() {
         const linkText = document.getElementById('finalLink').innerText;
         navigator.clipboard.writeText(linkText);
-        alert("Copied to clipboard!");
+        alert("Link Copied!");
     }
 </script>
 
