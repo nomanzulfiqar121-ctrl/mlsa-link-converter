@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MLSA Link Converter | Noman</title>
+    <title>NOMAN | MLSA Link Converter</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -29,6 +29,28 @@
             text-align: center;
             border: 1px solid #333;
         }
+        /* New Custom Header Style */
+        .brand-header {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .brand-name {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: var(--bg-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .brand-sub {
+            font-size: 12px;
+            color: #777;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+        
         .instruction-box {
             background: rgba(0, 120, 212, 0.1);
             border-left: 4px solid var(--primary-color);
@@ -41,7 +63,7 @@
         .instruction-box ol { font-size: 13px; margin: 0; padding-left: 20px; color: #ccc; }
         
         .input-group { text-align: left; margin-bottom: 15px; }
-        label { color: #aaa; font-size: 12px; font-weight: bold; margin-bottom: 5px; display: block; }
+        label { color: #aaa; font-size: 11px; font-weight: bold; margin-bottom: 5px; display: block; letter-spacing: 1px; }
         input {
             width: 100%;
             padding: 12px;
@@ -51,6 +73,8 @@
             color: white;
             box-sizing: border-box;
         }
+        input:focus { border-color: var(--primary-color); outline: none; }
+        
         .btn {
             width: 100%;
             padding: 15px;
@@ -61,7 +85,10 @@
             font-weight: bold;
             cursor: pointer;
             margin-top: 10px;
+            transition: 0.3s;
         }
+        .btn:hover { opacity: 0.9; transform: scale(0.98); }
+
         #result-box {
             margin-top: 25px;
             padding: 15px;
@@ -75,48 +102,58 @@
         .links-section {
             margin-top: 30px;
             text-align: left;
-            font-size: 13px;
+            font-size: 12px;
             border-top: 1px solid #222;
             padding-top: 20px;
         }
-        .links-section h4 { color: #eee; margin-bottom: 10px; }
-        .links-section ul { color: #888; padding-left: 20px; }
+        .links-section h4 { color: #eee; margin-bottom: 10px; text-transform: uppercase; font-size: 11px; }
+        .links-section ul { color: #666; padding-left: 20px; }
 
         footer { margin-top: 30px; border-top: 1px solid #222; padding-top: 15px; }
-        .social-links a { color: #fff; text-decoration: none; font-size: 12px; font-weight: bold; }
+        .social-links a { 
+            color: #fff; 
+            text-decoration: none; 
+            font-size: 12px; 
+            font-weight: bold; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 8px;
+        }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h1 style="font-size: 26px; margin-bottom: 5px;">Opty <span style="font-weight: 300; font-size: 18px; color: #777;">| Converter</span></h1>
-    <p style="color: #666; font-size: 13px; margin-bottom: 25px;">Microsoft Learn Student Ambassadors Tool</p>
+    <div class="brand-header">
+        <div class="brand-name">NOMAN</div>
+        <div class="brand-sub">MLSA Link Converter</div>
+    </div>
 
     <div class="instruction-box">
         <h3>Instructions</h3>
         <ol>
-            <li>Copy the full Microsoft Learn URL.</li>
+            <li>Copy the Microsoft Learn URL.</li>
             <li>Enter your 6-digit Contributor ID.</li>
-            <li>Paste the URL and generate your link.</li>
+            <li>Generate and copy your referral link.</li>
         </ol>
     </div>
 
     <div class="input-group">
-        <label>CONTRIBUTOR ID</label>
+        <label>YOUR CONTRIBUTOR ID</label>
         <input type="text" id="idInput" placeholder="e.g. 502891">
     </div>
 
     <div class="input-group">
-        <label>MICROSOFT LEARN LINK</label>
+        <label>LEARN PAGE LINK</label>
         <input type="text" id="urlInput" placeholder="https://learn.microsoft.com/...">
     </div>
     
-    <button class="btn" onclick="generateLink()">GENERATE TRACKING LINK</button>
+    <button class="btn" onclick="generateLink()">CREATE MY LINK</button>
 
     <div id="result-box">
-        <label>YOUR CUSTOM LINK:</label>
+        <label>CONVERTED LINK:</label>
         <div id="finalLink" class="final-url"></div>
-        <button onclick="copyLink()" style="background:white; color:black; border:none; padding:8px 15px; border-radius:5px; cursor:pointer; font-weight:bold;">COPY</button>
+        <button onclick="copyLink()" style="background:white; color:black; border:none; padding:8px 15px; border-radius:5px; cursor:pointer; font-weight:bold;">COPY LINK</button>
     </div>
 
     <div class="links-section">
@@ -125,15 +162,14 @@
             <li>learn.microsoft.com</li>
             <li>developer.microsoft.com</li>
             <li>azure.microsoft.com</li>
-            <li>social.technet.microsoft.com</li>
         </ul>
     </div>
 
     <footer>
-        <div style="color: #555; font-size: 12px; margin-bottom: 10px;">Made with ❤️ by <span style="color:#0078d4">Noman Zulfiqar</span></div>
+        <div style="color: #444; font-size: 11px; margin-bottom: 15px;">Designed & Developed by Noman Zulfiqar</div>
         <div class="social-links">
             <a href="https://www.linkedin.com/in/noman-zulfiqar-0916833a4" target="_blank">
-                <i class="fab fa-linkedin"></i> LINKEDIN
+                <i class="fab fa-linkedin"></i> MY LINKEDIN
             </a>
         </div>
     </footer>
@@ -143,7 +179,7 @@
     function generateLink() {
         const id = document.getElementById('idInput').value.trim();
         const url = document.getElementById('urlInput').value.trim();
-        if (!id || !url) { alert("Please fill both ID and URL!"); return; }
+        if (!id || !url) { alert("Bhai, dono cheezein daalna zaruri hain!"); return; }
         const separator = url.includes('?') ? '&' : '?';
         const finalUrl = `${url}${separator}wt.mc_id=studentamb_${id}`;
         document.getElementById('finalLink').innerText = finalUrl;
@@ -152,7 +188,7 @@
     function copyLink() {
         const linkText = document.getElementById('finalLink').innerText;
         navigator.clipboard.writeText(linkText);
-        alert("Link Copied!");
+        alert("Link copied successfully!");
     }
 </script>
 
