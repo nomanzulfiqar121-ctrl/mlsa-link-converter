@@ -35,14 +35,6 @@
             border: 1px solid #33383e;
         }
         
-        /* QR Code Styling 🖼️ */
-        #qrcode img {
-            border: 10px solid white;
-            border-radius: 8px;
-            margin: 20px auto;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-
         .logo-section { margin-bottom: 35px; }
         .arabic-style {
             font-family: 'Great Vibes', cursive;
@@ -61,6 +53,17 @@
             padding-top: 10px;
             display: inline-block;
         }
+
+        .instruction-box {
+            background: rgba(0, 120, 212, 0.08);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: left;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0, 120, 212, 0.2);
+        }
+        .instruction-box h3 { font-size: 13px; margin: 0 0 8px 0; color: #00c2ff; }
+        .instruction-box ol { font-size: 13px; margin: 0; padding-left: 18px; color: #bdc3c7; }
 
         .input-group { text-align: left; margin-bottom: 18px; }
         label { color: #8892b0; font-size: 11px; font-weight: bold; margin-bottom: 6px; display: block; letter-spacing: 1.5px; }
@@ -99,8 +102,28 @@
         }
         .final-url { color: #00c2ff; word-break: break-all; font-size: 13px; margin-bottom: 15px; }
 
+        /* QR Code Styling 🖼️ */
+        #qrcode img {
+            border: 10px solid white;
+            border-radius: 8px;
+            margin: 20px auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .links-section {
+            margin-top: 30px;
+            text-align: left;
+            font-size: 12px;
+            border-top: 1px solid #33383e;
+            padding-top: 20px;
+        }
+        .links-section h4 { color: #bdc3c7; margin-bottom: 10px; text-transform: uppercase; font-size: 11px; }
+        .links-section ul { color: #666; padding-left: 20px; margin: 0; }
+
         footer { margin-top: 30px; border-top: 1px solid #33383e; padding-top: 20px; }
         .dev-credit { color: #555; font-size: 11px; margin-bottom: 10px; letter-spacing: 1px; }
+        .social-links a { color: #8892b0; text-decoration: none; font-size: 12px; font-weight: bold; display: block; margin-top: 10px; }
+        .social-links a:hover { color: #0078d4; }
     </style>
 </head>
 <body>
@@ -109,6 +132,15 @@
     <div class="logo-section">
         <span class="arabic-style">Noman</span>
         <div class="english-name">NOMAN</div>
+    </div>
+
+    <div class="instruction-box">
+        <h3>How to use:</h3>
+        <ol>
+            <li>Paste your Microsoft Learn URL.</li>
+            <li>Enter your 6-digit Contributor ID.</li>
+            <li>Convert and share your link!</li>
+        </ol>
     </div>
 
     <div class="input-group">
@@ -132,8 +164,22 @@
         <button onclick="copyLink()" style="background:#fff; color:#000; border:none; padding:10px 25px; border-radius:8px; cursor:pointer; font-weight:bold; margin-top: 10px;">COPY URL</button>
     </div>
 
+    <div class="links-section">
+        <h4>Eligible Reference URLs</h4>
+        <ul>
+            <li>learn.microsoft.com</li>
+            <li>developer.microsoft.com</li>
+            <li>azure.microsoft.com</li>
+        </ul>
+    </div>
+
     <footer>
         <div class="dev-credit">Designed and Developed by Noman Zulfiqar</div>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/noman-zulfiqar-0916833a4" target="_blank">
+                <i class="fab fa-linkedin"></i> CONNECT ON LINKEDIN
+            </a>
+        </div>
     </footer>
 </div>
 
