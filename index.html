@@ -102,7 +102,6 @@
         }
         .final-url { color: #00c2ff; word-break: break-all; font-size: 13px; margin-bottom: 15px; }
 
-        /* QR Code Styling 🖼️ */
         #qrcode img {
             border: 10px solid white;
             border-radius: 8px;
@@ -121,7 +120,15 @@
         .links-section ul { color: #666; padding-left: 20px; margin: 0; }
 
         footer { margin-top: 30px; border-top: 1px solid #33383e; padding-top: 20px; }
-        .dev-credit { color: #555; font-size: 11px; margin-bottom: 10px; letter-spacing: 1px; }
+        
+        /* White color for the credit text ⚪ */
+        .dev-credit { 
+            color: #ffffff; 
+            font-size: 11px; 
+            margin-bottom: 10px; 
+            letter-spacing: 1px; 
+        }
+        
         .social-links a { color: #8892b0; text-decoration: none; font-size: 12px; font-weight: bold; display: block; margin-top: 10px; }
         .social-links a:hover { color: #0078d4; }
     </style>
@@ -158,9 +165,7 @@
     <div id="result-box">
         <label style="color:#8892b0">READY LINK:</label>
         <div id="finalLink" class="final-url"></div>
-        
         <div id="qrcode" style="display: flex; justify-content: center;"></div>
-
         <button onclick="copyLink()" style="background:#fff; color:#000; border:none; padding:10px 25px; border-radius:8px; cursor:pointer; font-weight:bold; margin-top: 10px;">COPY URL</button>
     </div>
 
@@ -193,18 +198,17 @@
             return; 
         }
 
-        // 🛠️ Step 1: Locale clean karna (e.g., /en-us/ hatana)
+        // Locale remove karne ka logic
         url = url.replace(/\/[a-z]{2}-[a-z]{2}\//i, '/');
-
-        // 🛠️ Step 2: Final URL taiyar karna
+        
         const separator = url.includes('?') ? '&' : '?';
         const finalUrl = `${url}${separator}wt.mc_id=studentamb_${id}`;
         
         document.getElementById('finalLink').innerText = finalUrl;
         document.getElementById('result-box').style.display = 'block';
 
-        // 🛠️ Step 3: QR Code generate karna ⚙️
-        document.getElementById("qrcode").innerHTML = ""; // Purana QR saaf karna
+        // QR Code generate karne ka logic
+        document.getElementById("qrcode").innerHTML = ""; 
         new QRCode(document.getElementById("qrcode"), {
             text: finalUrl,
             width: 150,
