@@ -173,13 +173,23 @@
 <script>
     function generateLink() {
         const id = document.getElementById('idInput').value.trim();
-        const url = document.getElementById('urlInput').value.trim();
-        if (!id || !url) { alert("Dono boxes bharna zaroori hain!"); return; }
+        let url = document.getElementById('urlInput').value.trim(); // Changed to 'let' to allow modification
+        
+        if (!id || !url) { 
+            alert("Dono boxes bharna zaroori hain!"); 
+            return; 
+        }
+
+        // 🛠️ Cleaning logic: Removes /en-us/ style locales
+        url = url.replace(/\/[a-z]{2}-[a-z]{2}\//i, '/');
+
         const separator = url.includes('?') ? '&' : '?';
         const finalUrl = `${url}${separator}wt.mc_id=studentamb_${id}`;
+        
         document.getElementById('finalLink').innerText = finalUrl;
         document.getElementById('result-box').style.display = 'block';
     }
+
     function copyLink() {
         const linkText = document.getElementById('finalLink').innerText;
         navigator.clipboard.writeText(linkText);
