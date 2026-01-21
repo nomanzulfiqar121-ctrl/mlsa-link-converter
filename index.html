@@ -17,7 +17,7 @@
             --btn-bg: linear-gradient(135deg, #0078d4 0%, #00c2ff 100%);
             --peach-color: #FFDAB9;
             --border-color: #33383e;
-            --instruction-bg: rgba(0, 120, 212, 0.08);
+            --menu-bg: #2d3136;
         }
 
         .light-mode {
@@ -27,7 +27,7 @@
             --input-bg: #f0f2f5;
             --btn-bg: #000000;
             --border-color: #dcdde1;
-            --instruction-bg: rgba(0, 120, 212, 0.05);
+            --menu-bg: #ffffff;
         }
 
         body {
@@ -43,134 +43,113 @@
 
         .card {
             background: var(--card-bg);
-            padding: 35px;
+            padding: 40px 30px;
             border-radius: 24px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            width: 90%; /* Fixed width for better mobile view */
+            width: 90%;
             max-width: 450px;
             text-align: center;
             border: 1px solid var(--border-color);
+            position: relative;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Sab kuch center karne ke liye 📏 */
+            align-items: center;
         }
 
-        .logo-section, .instruction-box, .input-group, .btn, #result-box, #history-box, .links-section, footer {
-            width: 100%; /* Inhe full width denge taaki alignment na bigre */
+        /* Menu Styles */
+        .menu-container { position: absolute; left: 20px; top: 20px; }
+        .menu-dots { background: none; border: none; color: var(--text-color); font-size: 20px; cursor: pointer; opacity: 0.7; }
+        .dropdown-content { 
+            display: none; position: absolute; left: 0; top: 30px; 
+            background: var(--menu-bg); border: 1px solid var(--border-color); 
+            padding: 15px; border-radius: 15px; width: 180px; z-index: 100;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
+        .menu-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 14px; }
+        .menu-item:last-child { margin-bottom: 0; }
 
-        .arabic-style { font-family: 'Great Vibes', cursive; font-size: 75px; line-height: 1; margin-bottom: -10px; color: var(--text-color); display: block; }
-        .english-name { font-family: 'Cinzel', serif; font-size: 22px; letter-spacing: 10px; color: #0078d4; text-transform: uppercase; padding-top: 10px; display: inline-block; }
+        /* Toggle Switch */
+        .switch { position: relative; display: inline-block; width: 40px; height: 20px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 20px; }
+        .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #0078d4; }
+        input:checked + .slider:before { transform: translateX(20px); }
 
-        .instruction-box {
-            background: var(--instruction-bg);
-            border-radius: 12px;
-            padding: 15px;
-            text-align: left;
-            margin-bottom: 25px;
-            border: 1px solid rgba(0, 120, 212, 0.2);
-            box-sizing: border-box;
-        }
-        .instruction-box h3 { font-size: 13px; margin: 0 0 8px 0; color: #00c2ff; }
-        .instruction-box ol { font-size: 13px; margin: 0; padding-left: 18px; color: #8892b0; }
+        .logo-section { margin-bottom: 25px; width: 100%; }
+        .arabic-style { font-family: 'Great Vibes', cursive; font-size: 70px; color: var(--text-color); }
+        .english-name { font-family: 'Cinzel', serif; font-size: 20px; letter-spacing: 8px; color: #0078d4; margin-top: -10px; }
 
-        .input-group { text-align: left; margin-bottom: 18px; }
-        label { color: #8892b0; font-size: 11px; font-weight: bold; margin-bottom: 6px; display: block; letter-spacing: 1.5px; }
+        .input-group { text-align: left; margin-bottom: 15px; width: 100%; }
+        label { color: #8892b0; font-size: 11px; font-weight: bold; margin-bottom: 5px; display: block; }
+        input { width: 100%; padding: 12px; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 10px; color: var(--text-color); box-sizing: border-box; }
+
+        .btn { width: 100%; padding: 15px; background: var(--btn-bg); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+
+        .history-item { background: var(--input-bg); padding: 12px; border-radius: 10px; margin-bottom: 8px; border-left: 3px solid var(--peach-color); display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box; }
+        .history-info { text-align: left; overflow: hidden; }
+        .history-url { font-size: 11px; white-space: nowrap; text-overflow: ellipsis; display: block; overflow: hidden; }
         
-        input { 
-            width: 100%; padding: 14px; background: var(--input-bg); 
-            border: 1px solid var(--border-color); border-radius: 10px; 
-            color: var(--text-color); box-sizing: border-box; transition: 0.3s;
-        }
+        .links-section { margin-top: 25px; text-align: left; width: 100%; border-top: 1px solid var(--border-color); padding-top: 15px; }
+        .links-section h4 { font-size: 11px; color: #8892b0; margin-bottom: 8px; }
+        .links-section ul { font-size: 12px; color: #8892b0; padding-left: 15px; }
 
-        .btn { 
-            width: 100%; padding: 16px; background: var(--btn-bg); 
-            color: white; border: none; border-radius: 12px; 
-            font-weight: bold; cursor: pointer; margin-top: 10px;
-            text-transform: uppercase;
-        }
-
-        /* History Alignment Fix 📏 */
-        .history-item { 
-            background: var(--input-bg); padding: 12px; border-radius: 10px; 
-            margin-bottom: 10px; border-left: 3px solid var(--peach-color); 
-            display: flex; justify-content: space-between; align-items: center;
-            width: 100%; box-sizing: border-box;
-        }
-        .history-info { text-align: left; flex: 1; overflow: hidden; margin-right: 10px; }
-        .history-url { font-size: 11px; color: var(--text-color) !important; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; display: block; }
-        .history-date { font-size: 10px; color: #8892b0; display: block; }
-
-        .links-section {
-            margin-top: 30px; text-align: left; font-size: 12px;
-            border-top: 1px solid var(--border-color); padding-top: 20px;
-        }
-        .links-section h4 { color: #bdc3c7; margin-bottom: 10px; text-transform: uppercase; font-size: 11px; }
-        .links-section ul { color: #8892b0; padding-left: 20px; margin: 0; }
-
-        footer { margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 20px; }
-        .dev-credit { color: var(--text-color); font-size: 11px; margin-bottom: 10px; letter-spacing: 1px; font-weight: bold; opacity: 0.8; }
-        .social-links a { color: #8892b0; text-decoration: none; font-size: 12px; font-weight: bold; display: block; margin-top: 10px; }
-
-        .theme-toggle {
-            position: fixed; bottom: 30px; right: 30px;
-            width: 50px; height: 50px; border-radius: 50%;
-            background: var(--btn-bg); color: white;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            border: none; z-index: 1000;
-        }
-
-        #toast { visibility: hidden; min-width: 200px; background: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%); border: 1px solid var(--peach-color); z-index: 1001; }
-        #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+        #toast { visibility: hidden; min-width: 200px; background: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%); z-index: 1001; }
+        #toast.show { visibility: visible; animation: fadein 0.5s; }
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
-        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
     </style>
 </head>
 <body class="dark-mode">
 
-<button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
-    <i class="fas fa-sun"></i>
-</button>
-
 <div class="card">
+    <div class="menu-container">
+        <button class="menu-dots" onclick="toggleMenu()">
+            <i class="fas fa-ellipsis-v"></i>
+        </button>
+        <div id="themeMenu" class="dropdown-content">
+            <div class="menu-item">
+                <span><i class="fas fa-sun"></i> Light Mode</span>
+                <label class="switch">
+                    <input type="checkbox" id="lightToggle" onchange="modeManager('light')">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="menu-item">
+                <span><i class="fas fa-moon"></i> Dark Mode</span>
+                <label class="switch">
+                    <input type="checkbox" id="darkToggle" onchange="modeManager('dark')">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
     <div class="logo-section">
         <span class="arabic-style">Noman</span>
         <div class="english-name">NOMAN</div>
     </div>
 
-    <div class="instruction-box">
-        <h3>How to use:</h3>
-        <ol>
-            <li>Paste your URL here.</li>
-            <li>Enter your 6-digit Contributor ID.</li>
-            <li>Convert and share your link!</li>
-        </ol>
-    </div>
-
     <div class="input-group">
         <label>YOUR CONTRIBUTOR ID</label>
-        <input type="text" id="idInput" placeholder="Enter ID (e.g. 502891)">
+        <input type="text" id="idInput" placeholder="e.g. 502891">
     </div>
 
     <div class="input-group">
-        <label>TARGET URL</label>
+        <label>MICROSOFT LEARN LINK</label>
         <input type="text" id="urlInput" placeholder="Paste link here...">
     </div>
     
     <button class="btn" onclick="generateLink()">Create My Link</button>
 
-    <div id="result-box" style="display:none; margin-top:20px; background:var(--input-bg); padding:15px; border-radius:12px; border: 1px solid #0078d4; box-sizing: border-box;">
-        <label style="color:#8892b0; font-size: 11px; display: block; text-align: left; margin-bottom: 5px;">READY LINK:</label>
-        <div id="finalLink" style="font-size:12px; word-break:break-all; margin-bottom:15px; color: #00c2ff; text-align: left;"></div>
-        <div id="qrcode" style="display:flex; justify-content:center;"></div>
-        <button onclick="copyLink()" class="btn" style="background:#fff; color:#000; padding:10px; font-size:12px; margin-top: 15px;">COPY URL</button>
+    <div id="result-box" style="display:none; margin-top:20px; width: 100%;">
+        <div id="qrcode" style="display:flex; justify-content:center; margin-bottom:15px;"></div>
+        <button onclick="copyLink()" class="btn" style="background:#fff; color:#000;">COPY URL</button>
     </div>
 
-    <div id="history-box" style="display:none; margin-top:25px; text-align:left; width: 100%;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-            <h4 style="font-size:11px; color:var(--peach-color); letter-spacing: 1.5px; text-transform: uppercase; margin: 0;">Recent History</h4>
-            <button onclick="clearAllHistory()" style="background:none; border:none; color:#ff4d4d; font-size:10px; cursor:pointer; font-weight: bold;">CLEAR ALL</button>
+    <div id="history-box" style="display:none; margin-top:25px; width: 100%;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <h4 style="font-size:11px; margin:0;">RECENT HISTORY</h4>
+            <button onclick="clearAllHistory()" style="background:none; border:none; color:#ff4d4d; font-size:10px; cursor:pointer;">CLEAR ALL</button>
         </div>
         <div id="history-list"></div>
     </div>
@@ -180,43 +159,47 @@
         <ul>
             <li>learn.microsoft.com</li>
             <li>developer.microsoft.com</li>
-            <li>azure.microsoft.com</li>
         </ul>
     </div>
-
-    <footer>
-        <div class="dev-credit">Designed and Developed by Noman Zulfiqar</div>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/noman-zulfiqar-0916833a4" target="_blank">
-                <i class="fab fa-linkedin"></i> CONNECT ON LINKEDIN
-            </a>
-        </div>
-    </footer>
 </div>
 
 <div id="toast"></div>
 
 <script>
-    function toggleTheme() {
+    function toggleMenu() {
+        const menu = document.getElementById('themeMenu');
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function modeManager(selected) {
+        const light = document.getElementById('lightToggle');
+        const dark = document.getElementById('darkToggle');
         const body = document.body;
-        const btn = document.getElementById("themeBtn");
-        body.classList.toggle("light-mode");
-        
-        if(body.classList.contains("light-mode")) {
-            btn.innerHTML = '<i class="fas fa-moon"></i>';
-            localStorage.setItem("theme", "light");
+
+        if (selected === 'light') {
+            dark.checked = false;
+            if(light.checked) {
+                body.classList.add('light-mode');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.remove('light-mode');
+            }
         } else {
-            btn.innerHTML = '<i class="fas fa-sun"></i>';
-            localStorage.setItem("theme", "dark");
+            light.checked = false;
+            if(dark.checked) {
+                body.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark');
+            }
         }
     }
 
-    if(localStorage.getItem("theme") === "light") { 
-        document.body.classList.add("light-mode");
-        document.getElementById("themeBtn").innerHTML = '<i class="fas fa-moon"></i>';
+    // Set initial toggle state
+    if(localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+        document.getElementById('lightToggle').checked = true;
+    } else {
+        document.getElementById('darkToggle').checked = true;
     }
-
-    window.onload = function() { displayHistory(); };
 
     function showToast(msg) {
         const x = document.getElementById("toast");
@@ -227,82 +210,54 @@
     function generateLink() {
         const id = document.getElementById('idInput').value.trim();
         let url = document.getElementById('urlInput').value.trim();
-        
-        if (!id || !url) { showToast("⚠️ Dono boxes bharna zaroori hain!"); return; }
+        if (!id || !url) { showToast("⚠️ Fill all fields!"); return; }
 
-        url = url.replace(/\/[a-z]{2}-[a-z]{2}\//i, '/');
-        const separator = url.includes('?') ? '&' : '?';
-        const finalUrl = `${url}${separator}wt.mc_id=studentamb_${id}`;
-        
-        document.getElementById('finalLink').innerText = finalUrl;
+        const finalUrl = `${url}${url.includes('?') ? '&' : '?'}wt.mc_id=studentamb_${id}`;
         document.getElementById('result-box').style.display = 'block';
         document.getElementById("qrcode").innerHTML = ""; 
-        new QRCode(document.getElementById("qrcode"), { 
-            text: finalUrl, width: 150, height: 150,
-            colorDark : "#000000", colorLight : "#ffffff"
-        });
-
+        new QRCode(document.getElementById("qrcode"), { text: finalUrl, width: 120, height: 120 });
         saveToHistory(finalUrl);
-        showToast("✅ Link Generate Ho Gaya!");
+        showToast("✅ Generated!");
     }
 
-    function saveToHistory(newUrl) {
+    function saveToHistory(url) {
         let history = JSON.parse(localStorage.getItem("mlsa_history")) || [];
-        const now = new Date();
-        const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
-        const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-
-        history.unshift({ url: newUrl, date: `${dateStr} | ${timeStr}` });
-        if (history.length > 5) history.pop();
-        localStorage.setItem("mlsa_history", JSON.stringify(history));
+        history.unshift({ url: url, date: new Date().toLocaleDateString() });
+        localStorage.setItem("mlsa_history", JSON.stringify(history.slice(0, 5)));
         displayHistory();
     }
 
     function displayHistory() {
         const history = JSON.parse(localStorage.getItem("mlsa_history")) || [];
-        const listDiv = document.getElementById("history-list");
-        const box = document.getElementById("history-box");
-
-        if (history.length === 0) { box.style.display = "none"; return; }
-        box.style.display = "block";
-        listDiv.innerHTML = ""; 
-
-        history.forEach((item, index) => {
-            listDiv.innerHTML += `
-                <div class="history-item">
-                    <div class="history-info">
-                        <span class="history-url">${item.url}</span>
-                        <span class="history-date">${item.date}</span>
-                    </div>
-                    <div style="display:flex; gap:10px;">
-                        <button onclick="copySpecific('${item.url}')" style="background:none; border:none; color:var(--peach-color); cursor:pointer;"><i class="fas fa-copy"></i></button>
-                        <button onclick="deleteSingle(${index})" style="background:none; border:none; color:#ff4d4d; cursor:pointer;"><i class="fas fa-trash"></i></button>
-                    </div>
-                </div>`;
-        });
+        const list = document.getElementById("history-list");
+        document.getElementById("history-box").style.display = history.length ? "block" : "none";
+        list.innerHTML = history.map((item, i) => `
+            <div class="history-item">
+                <div class="history-info">
+                    <span class="history-url">${item.url}</span>
+                </div>
+                <button onclick="deleteSingle(${i})" style="background:none; border:none; color:#ff4d4d;"><i class="fas fa-trash"></i></button>
+            </div>`).join('');
     }
 
-    function deleteSingle(index) {
+    function deleteSingle(i) {
         let h = JSON.parse(localStorage.getItem("mlsa_history"));
-        h.splice(index, 1);
+        h.splice(i, 1);
         localStorage.setItem("mlsa_history", JSON.stringify(h));
         displayHistory();
-        showToast("🗑️ Delete Ho Gaya!");
     }
 
     function clearAllHistory() {
-        if(confirm("Saari history saaf karein?")) { localStorage.removeItem("mlsa_history"); displayHistory(); showToast("🧹 History Clear!"); }
+        localStorage.removeItem("mlsa_history");
+        displayHistory();
     }
 
-    function copySpecific(text) {
-        navigator.clipboard.writeText(text);
-        showToast("📋 Link Copied!");
+    window.onclick = function(event) {
+        if (!event.target.matches('.menu-dots') && !event.target.closest('.dropdown-content')) {
+            document.getElementById('themeMenu').style.display = 'none';
+        }
     }
-
-    function copyLink() {
-        navigator.clipboard.writeText(document.getElementById('finalLink').innerText);
-        showToast("📋 URL Copied!");
-    }
+    displayHistory();
 </script>
 </body>
 </html>
