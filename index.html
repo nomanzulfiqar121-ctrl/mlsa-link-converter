@@ -18,6 +18,7 @@
             --btn-bg: linear-gradient(135deg, #0078d4 0%, #00c2ff 100%);
             --peach-color: #FFDAB9;
             --border-color: #33383e;
+            --instruction-bg: rgba(0, 120, 212, 0.08);
         }
 
         .light-mode {
@@ -28,6 +29,7 @@
             --input-bg: #f0f2f5;
             --btn-bg: #000000; /* Aapka Black Button 🖤 */
             --border-color: #dcdde1;
+            --instruction-bg: rgba(0, 120, 212, 0.05);
         }
 
         body {
@@ -52,30 +54,59 @@
             border: 1px solid var(--border-color);
         }
 
-        /* Logo & Inputs */
-        .arabic-style { font-family: 'Great Vibes', cursive; font-size: 75px; color: var(--text-color); }
-        .english-name { font-family: 'Cinzel', serif; font-size: 22px; letter-spacing: 10px; color: #0078d4; }
+        .logo-section { margin-bottom: 35px; }
+        .arabic-style { font-family: 'Great Vibes', cursive; font-size: 75px; line-height: 1; margin-bottom: -10px; color: var(--text-color); display: block; }
+        .english-name { font-family: 'Cinzel', serif; font-size: 22px; letter-spacing: 10px; color: #0078d4; text-transform: uppercase; padding-top: 10px; display: inline-block; }
+
+        /* Instruction Box 📘 */
+        .instruction-box {
+            background: var(--instruction-bg);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: left;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0, 120, 212, 0.2);
+        }
+        .instruction-box h3 { font-size: 13px; margin: 0 0 8px 0; color: #00c2ff; }
+        .instruction-box ol { font-size: 13px; margin: 0; padding-left: 18px; color: #8892b0; }
+
+        .input-group { text-align: left; margin-bottom: 18px; }
+        label { color: #8892b0; font-size: 11px; font-weight: bold; margin-bottom: 6px; display: block; letter-spacing: 1.5px; }
         
         input { 
             width: 100%; padding: 14px; background: var(--input-bg); 
             border: 1px solid var(--border-color); border-radius: 10px; 
-            color: var(--text-color); margin-top: 5px;
+            color: var(--text-color); box-sizing: border-box; transition: 0.3s;
         }
 
         .btn { 
             width: 100%; padding: 16px; background: var(--btn-bg); 
             color: white; border: none; border-radius: 12px; 
-            font-weight: bold; cursor: pointer; margin-top: 15px;
+            font-weight: bold; cursor: pointer; margin-top: 10px;
             text-transform: uppercase;
         }
 
-        /* History & Items */
+        /* History Styling */
         .history-item { 
             background: var(--input-bg); padding: 12px; border-radius: 10px; 
             margin-bottom: 10px; border-left: 3px solid var(--peach-color); 
             display: flex; justify-content: space-between; align-items: center;
         }
-        .history-url { color: var(--text-color) !important; font-size: 11px; }
+        .history-url { font-size: 11px; color: var(--text-color) !important; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; display: block; }
+        .history-date { font-size: 10px; color: #8892b0; display: block; }
+
+        /* Eligible URLs Section 🔗 */
+        .links-section {
+            margin-top: 30px; text-align: left; font-size: 12px;
+            border-top: 1px solid var(--border-color); padding-top: 20px;
+        }
+        .links-section h4 { color: #bdc3c7; margin-bottom: 10px; text-transform: uppercase; font-size: 11px; }
+        .links-section ul { color: #666; padding-left: 20px; margin: 0; }
+
+        /* Footer & Credits 👤 */
+        footer { margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 20px; }
+        .dev-credit { color: var(--text-color); font-size: 11px; margin-bottom: 10px; letter-spacing: 1px; font-weight: bold; opacity: 0.8; }
+        .social-links a { color: #8892b0; text-decoration: none; font-size: 12px; font-weight: bold; display: block; margin-top: 10px; }
 
         /* Floating Theme Toggle 🌓 */
         .theme-toggle {
@@ -88,7 +119,7 @@
         }
 
         /* Toast 🔔 */
-        #toast { visibility: hidden; min-width: 200px; background: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%); border: 1px solid var(--peach-color); }
+        #toast { visibility: hidden; min-width: 200px; background: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%); border: 1px solid var(--peach-color); z-index: 1001; }
         #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
@@ -101,34 +132,64 @@
 </button>
 
 <div class="card">
-    <span class="arabic-style">Noman</span><br>
-    <div class="english-name">NOMAN</div>
-
-    <div class="input-group" style="text-align:left; margin-top:30px;">
-        <label style="font-size:11px; color:#8892b0;">CONTRIBUTOR ID</label>
-        <input type="text" id="idInput" placeholder="e.g. 502891">
+    <div class="logo-section">
+        <span class="arabic-style">Noman</span>
+        <div class="english-name">NOMAN</div>
     </div>
 
-    <div class="input-group" style="text-align:left; margin-top:15px;">
-        <label style="font-size:11px; color:#8892b0;">MICROSOFT LEARN LINK</label>
+    <div class="instruction-box">
+        <h3>How to use:</h3>
+        <ol>
+            <li>Paste your Microsoft Learn URL.</li>
+            <li>Enter your 6-digit Contributor ID.</li>
+            <li>Convert and share your link!</li>
+        </ol>
+    </div>
+
+    <div class="input-group">
+        <label>YOUR CONTRIBUTOR ID</label>
+        <input type="text" id="idInput" placeholder="Enter ID (e.g. 502891)">
+    </div>
+
+    <div class="input-group">
+        <label>MICROSOFT LEARN LINK</label>
         <input type="text" id="urlInput" placeholder="Paste link here...">
     </div>
     
     <button class="btn" onclick="generateLink()">Create My Link</button>
 
-    <div id="result-box" style="display:none; margin-top:20px; background:var(--input-bg); padding:15px; border-radius:12px;">
-        <div id="finalLink" style="font-size:12px; word-break:break-all; margin-bottom:10px;"></div>
+    <div id="result-box" style="display:none; margin-top:20px; background:var(--input-bg); padding:15px; border-radius:12px; border: 1px solid #0078d4;">
+        <label style="color:#8892b0; font-size: 11px; display: block; text-align: left; margin-bottom: 5px;">READY LINK:</label>
+        <div id="finalLink" style="font-size:12px; word-break:break-all; margin-bottom:15px; color: #00c2ff;"></div>
         <div id="qrcode" style="display:flex; justify-content:center;"></div>
-        <button onclick="copyLink()" class="btn" style="background:#fff; color:#000; padding:10px; font-size:12px;">Copy Link</button>
+        <button onclick="copyLink()" class="btn" style="background:#fff; color:#000; padding:10px; font-size:12px; margin-top: 15px;">COPY URL</button>
     </div>
 
     <div id="history-box" style="display:none; margin-top:25px; text-align:left;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <h4 style="font-size:11px; color:var(--peach-color);">RECENT HISTORY</h4>
-            <button onclick="clearAllHistory()" style="background:none; border:none; color:#ff4d4d; font-size:10px; cursor:pointer;">CLEAR ALL</button>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+            <h4 style="font-size:11px; color:var(--peach-color); letter-spacing: 1.5px; text-transform: uppercase; margin: 0;">Recent History</h4>
+            <button onclick="clearAllHistory()" style="background:none; border:none; color:#ff4d4d; font-size:10px; cursor:pointer; font-weight: bold;">CLEAR ALL</button>
         </div>
         <div id="history-list"></div>
     </div>
+
+    <div class="links-section">
+        <h4>Eligible Reference URLs</h4>
+        <ul>
+            <li>learn.microsoft.com</li>
+            <li>developer.microsoft.com</li>
+            <li>azure.microsoft.com</li>
+        </ul>
+    </div>
+
+    <footer>
+        <div class="dev-credit">Designed and Developed by Noman Zulfiqar</div>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/noman-zulfiqar-0916833a4" target="_blank">
+                <i class="fab fa-linkedin"></i> CONNECT ON LINKEDIN
+            </a>
+        </div>
+    </footer>
 </div>
 
 <div id="toast"></div>
@@ -149,8 +210,12 @@
         }
     }
 
-    // Load Saved Theme
-    if(localStorage.getItem("theme") === "light") { toggleTheme(); }
+    if(localStorage.getItem("theme") === "light") { 
+        document.body.classList.add("light-mode");
+        document.getElementById("themeBtn").innerHTML = '<i class="fas fa-moon"></i>';
+    }
+
+    window.onload = function() { displayHistory(); };
 
     function showToast(msg) {
         const x = document.getElementById("toast");
@@ -166,8 +231,8 @@
         const id = document.getElementById('idInput').value.trim();
         let url = document.getElementById('urlInput').value.trim();
         
-        if (!id || !url) { showToast("⚠️ Fill all fields!"); return; }
-        if (!isValidUrl(url)) { showToast("❌ Only Microsoft links allowed!"); return; }
+        if (!id || !url) { showToast("⚠️ Dono boxes bharna zaroori hain!"); return; }
+        if (!isValidUrl(url)) { showToast("❌ Sirf Microsoft links allow hain!"); return; }
 
         url = url.replace(/\/[a-z]{2}-[a-z]{2}\//i, '/');
         const finalUrl = `${url}${url.includes('?') ? '&' : '?'}wt.mc_id=studentamb_${id}`;
@@ -175,15 +240,22 @@
         document.getElementById('finalLink').innerText = finalUrl;
         document.getElementById('result-box').style.display = 'block';
         document.getElementById("qrcode").innerHTML = ""; 
-        new QRCode(document.getElementById("qrcode"), { text: finalUrl, width: 120, height: 120 });
+        new QRCode(document.getElementById("qrcode"), { 
+            text: finalUrl, width: 150, height: 150,
+            colorDark : "#000000", colorLight : "#ffffff"
+        });
 
         saveToHistory(finalUrl);
-        showToast("✅ Generated!");
+        showToast("✅ Link Generate Ho Gaya!");
     }
 
     function saveToHistory(newUrl) {
         let history = JSON.parse(localStorage.getItem("mlsa_history")) || [];
-        history.unshift({ url: newUrl, date: new Date().toLocaleDateString() });
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+        const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+        history.unshift({ url: newUrl, date: `${dateStr} | ${timeStr}` });
         if (history.length > 5) history.pop();
         localStorage.setItem("mlsa_history", JSON.stringify(history));
         displayHistory();
@@ -201,8 +273,12 @@
         history.forEach((item, index) => {
             listDiv.innerHTML += `
                 <div class="history-item">
-                    <div style="overflow:hidden;"><span class="history-url">${item.url}</span></div>
+                    <div style="overflow:hidden; text-align: left;">
+                        <span class="history-url">${item.url}</span>
+                        <span class="history-date">${item.date}</span>
+                    </div>
                     <div style="display:flex; gap:10px; margin-left:10px;">
+                        <button onclick="copySpecific('${item.url}')" style="background:none; border:none; color:var(--peach-color); cursor:pointer;"><i class="fas fa-copy"></i></button>
                         <button onclick="deleteSingle(${index})" style="background:none; border:none; color:#ff4d4d; cursor:pointer;"><i class="fas fa-trash"></i></button>
                     </div>
                 </div>`;
@@ -214,16 +290,21 @@
         h.splice(index, 1);
         localStorage.setItem("mlsa_history", JSON.stringify(h));
         displayHistory();
-        showToast("🗑️ Deleted!");
+        showToast("🗑️ Delete Ho Gaya!");
     }
 
     function clearAllHistory() {
-        if(confirm("Clear everything?")) { localStorage.removeItem("mlsa_history"); displayHistory(); showToast("🧹 Cleared!"); }
+        if(confirm("Saari history saaf karein?")) { localStorage.removeItem("mlsa_history"); displayHistory(); showToast("🧹 History Clear!"); }
+    }
+
+    function copySpecific(text) {
+        navigator.clipboard.writeText(text);
+        showToast("📋 Link Copied!");
     }
 
     function copyLink() {
         navigator.clipboard.writeText(document.getElementById('finalLink').innerText);
-        showToast("📋 Copied!");
+        showToast("📋 URL Copied!");
     }
 </script>
 </body>
