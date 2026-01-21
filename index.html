@@ -11,23 +11,22 @@
     <style>
         :root {
             --bg-color: #1a1c1e;
-            --card-bg: #25282c;
-            --text-color: #ffffff;
-            --input-bg: #121416;
-            --btn-bg: linear-gradient(135deg, #0078d4 0%, #00c2ff 100%);
-            --peach-color: #FFDAB9;
-            --border-color: #33383e;
-            --menu-bg: #2d3136;
-        }
-
-        .light-mode {
-            --bg-color: #f4f7f6;
             --card-bg: #ffffff;
             --text-color: #1a1c1e;
             --input-bg: #f0f2f5;
             --btn-bg: #000000;
             --border-color: #dcdde1;
-            --menu-bg: #ffffff;
+            --instruction-bg: #ebf5ff;
+        }
+
+        .dark-mode {
+            --bg-color: #000000;
+            --card-bg: #1a1c1e;
+            --text-color: #ffffff;
+            --input-bg: #2d3136;
+            --btn-bg: #0078d4;
+            --border-color: #33383e;
+            --instruction-bg: rgba(0, 120, 212, 0.1);
         }
 
         body {
@@ -44,68 +43,92 @@
         .card {
             background: var(--card-bg);
             padding: 40px 30px;
-            border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
             width: 90%;
             max-width: 450px;
             text-align: center;
-            border: 1px solid var(--border-color);
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* Menu Styles */
-        .menu-container { position: absolute; left: 20px; top: 20px; }
-        .menu-dots { background: none; border: none; color: var(--text-color); font-size: 20px; cursor: pointer; opacity: 0.7; }
+        /* 3-Dot Menu ⚪ */
+        .menu-container { position: absolute; left: 25px; top: 25px; z-index: 1000; }
+        .menu-dots { background: none; border: none; color: var(--text-color); font-size: 22px; cursor: pointer; padding: 5px; }
         .dropdown-content { 
-            display: none; position: absolute; left: 0; top: 30px; 
-            background: var(--menu-bg); border: 1px solid var(--border-color); 
-            padding: 15px; border-radius: 15px; width: 180px; z-index: 100;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: none; position: absolute; left: 0; top: 35px; 
+            background: var(--card-bg); border: 1px solid var(--border-color); 
+            padding: 15px; border-radius: 15px; width: 190px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
-        .menu-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 14px; }
-        .menu-item:last-child { margin-bottom: 0; }
+        .menu-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .menu-item span { font-size: 14px; font-weight: 500; }
 
-        /* Toggle Switch */
-        .switch { position: relative; display: inline-block; width: 40px; height: 20px; }
+        /* Toggle Switches 🔘 */
+        .switch { position: relative; display: inline-block; width: 45px; height: 24px; }
         .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 20px; }
-        .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background-color: #0078d4; }
-        input:checked + .slider:before { transform: translateX(20px); }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #2196F3; }
+        input:checked + .slider:before { transform: translateX(21px); }
 
-        .logo-section { margin-bottom: 25px; width: 100%; }
-        .arabic-style { font-family: 'Great Vibes', cursive; font-size: 70px; color: var(--text-color); }
-        .english-name { font-family: 'Cinzel', serif; font-size: 20px; letter-spacing: 8px; color: #0078d4; margin-top: -10px; }
+        /* Logo Section */
+        .logo-section { margin-bottom: 20px; }
+        .arabic-style { font-family: 'Great Vibes', cursive; font-size: 85px; line-height: 1; color: var(--text-color); }
+        .english-name { font-family: 'Cinzel', serif; font-size: 24px; letter-spacing: 12px; color: #0078d4; font-weight: bold; display: block; margin-top: 5px; }
 
-        .input-group { text-align: left; margin-bottom: 15px; width: 100%; }
-        label { color: #8892b0; font-size: 11px; font-weight: bold; margin-bottom: 5px; display: block; }
-        input { width: 100%; padding: 12px; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 10px; color: var(--text-color); box-sizing: border-box; }
+        /* Instruction Box 📘 */
+        .instruction-box {
+            background: var(--instruction-bg); border-radius: 15px; padding: 20px;
+            text-align: left; margin-bottom: 25px; width: 100%; box-sizing: border-box;
+            border: 1px solid rgba(0, 120, 212, 0.1);
+        }
+        .instruction-box h3 { font-size: 15px; color: #00c2ff; margin: 0 0 10px 0; font-weight: bold; }
+        .instruction-box ol { font-size: 13px; margin: 0; padding-left: 20px; color: #666; line-height: 1.6; }
+        .dark-mode .instruction-box ol { color: #8892b0; }
 
-        .btn { width: 100%; padding: 15px; background: var(--btn-bg); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        /* Inputs ✍️ */
+        .input-group { text-align: left; margin-bottom: 20px; width: 100%; }
+        label { color: #8892b0; font-size: 11px; font-weight: 800; margin-bottom: 8px; display: block; letter-spacing: 1px; }
+        input { 
+            width: 100%; padding: 15px; background: var(--input-bg); 
+            border: 1px solid var(--border-color); border-radius: 12px; 
+            color: var(--text-color); box-sizing: border-box; font-size: 14px;
+        }
 
-        .history-item { background: var(--input-bg); padding: 12px; border-radius: 10px; margin-bottom: 8px; border-left: 3px solid var(--peach-color); display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box; }
-        .history-info { text-align: left; overflow: hidden; }
-        .history-url { font-size: 11px; white-space: nowrap; text-overflow: ellipsis; display: block; overflow: hidden; }
+        .btn { 
+            width: 100%; padding: 18px; background: var(--btn-bg); 
+            color: white; border: none; border-radius: 12px; 
+            font-weight: bold; cursor: pointer; letter-spacing: 1px;
+            text-transform: uppercase; font-size: 14px; margin-top: 5px;
+        }
+
+        /* History & Links */
+        .history-item { background: var(--input-bg); padding: 12px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box; }
+        .history-url { font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 80%; text-align: left; }
         
-        .links-section { margin-top: 25px; text-align: left; width: 100%; border-top: 1px solid var(--border-color); padding-top: 15px; }
-        .links-section h4 { font-size: 11px; color: #8892b0; margin-bottom: 8px; }
-        .links-section ul { font-size: 12px; color: #8892b0; padding-left: 15px; }
+        .links-section { margin-top: 30px; text-align: left; width: 100%; border-top: 1px solid var(--border-color); padding-top: 20px; }
+        .links-section h4 { font-size: 11px; color: #8892b0; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+        .links-section ul { font-size: 13px; color: #8892b0; padding-left: 18px; line-height: 1.6; }
 
-        #toast { visibility: hidden; min-width: 200px; background: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%); z-index: 1001; }
+        /* Footer 👤 */
+        footer { margin-top: 35px; width: 100%; }
+        .dev-credit { font-size: 12px; font-weight: bold; color: var(--text-color); opacity: 0.8; margin-bottom: 12px; }
+        .social-link { background: #f0f2f5; padding: 10px 20px; border-radius: 8px; text-decoration: none; color: #0078d4; font-size: 12px; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; }
+        .dark-mode .social-link { background: #2d3136; }
+
+        #toast { visibility: hidden; min-width: 200px; background: #333; color: #fff; text-align: center; border-radius: 10px; padding: 15px; position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); z-index: 2000; }
         #toast.show { visibility: visible; animation: fadein 0.5s; }
-        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 40px; opacity: 1;} }
     </style>
 </head>
-<body class="dark-mode">
+<body>
 
 <div class="card">
     <div class="menu-container">
-        <button class="menu-dots" onclick="toggleMenu()">
-            <i class="fas fa-ellipsis-v"></i>
-        </button>
+        <button class="menu-dots" onclick="toggleMenu()"><i class="fas fa-ellipsis-v"></i></button>
         <div id="themeMenu" class="dropdown-content">
             <div class="menu-item">
                 <span><i class="fas fa-sun"></i> Light Mode</span>
@@ -126,12 +149,21 @@
 
     <div class="logo-section">
         <span class="arabic-style">Noman</span>
-        <div class="english-name">NOMAN</div>
+        <span class="english-name">NOMAN</span>
+    </div>
+
+    <div class="instruction-box">
+        <h3>How to use:</h3>
+        <ol>
+            <li>Paste your URL here.</li>
+            <li>Enter your 6-digit Contributor ID.</li>
+            <li>Convert and share your link!</li>
+        </ol>
     </div>
 
     <div class="input-group">
         <label>YOUR CONTRIBUTOR ID</label>
-        <input type="text" id="idInput" placeholder="e.g. 502891">
+        <input type="text" id="idInput" placeholder="Enter ID (e.g. 502891)">
     </div>
 
     <div class="input-group">
@@ -141,15 +173,15 @@
     
     <button class="btn" onclick="generateLink()">Create My Link</button>
 
-    <div id="result-box" style="display:none; margin-top:20px; width: 100%;">
-        <div id="qrcode" style="display:flex; justify-content:center; margin-bottom:15px;"></div>
-        <button onclick="copyLink()" class="btn" style="background:#fff; color:#000;">COPY URL</button>
+    <div id="result-box" style="display:none; margin-top:25px; width: 100%;">
+        <div id="qrcode" style="display:flex; justify-content:center; margin-bottom:20px;"></div>
+        <button onclick="copyLink()" class="btn" style="background:#fff; color:#000; border: 1px solid #dcdde1;">COPY URL</button>
     </div>
 
-    <div id="history-box" style="display:none; margin-top:25px; width: 100%;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <h4 style="font-size:11px; margin:0;">RECENT HISTORY</h4>
-            <button onclick="clearAllHistory()" style="background:none; border:none; color:#ff4d4d; font-size:10px; cursor:pointer;">CLEAR ALL</button>
+    <div id="history-box" style="display:none; margin-top:30px; width: 100%;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <h4 style="font-size:11px; color:#8892b0; margin:0;">RECENT HISTORY</h4>
+            <button onclick="clearAllHistory()" style="background:none; border:none; color:#ff4d4d; font-size:10px; cursor:pointer; font-weight:bold;">CLEAR ALL</button>
         </div>
         <div id="history-list"></div>
     </div>
@@ -159,47 +191,54 @@
         <ul>
             <li>learn.microsoft.com</li>
             <li>developer.microsoft.com</li>
+            <li>azure.microsoft.com</li>
         </ul>
     </div>
+
+    <footer>
+        <div class="dev-credit">Designed and Developed by Noman Zulfiqar</div>
+        <a href="https://www.linkedin.com/in/noman-zulfiqar-0916833a4" target="_blank" class="social-link">
+            <i class="fab fa-linkedin"></i> CONNECT ON LINKEDIN
+        </a>
+    </footer>
 </div>
 
 <div id="toast"></div>
 
 <script>
+    // Menu & Theme Logic 🌓
     function toggleMenu() {
         const menu = document.getElementById('themeMenu');
-        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
     }
 
     function modeManager(selected) {
+        const body = document.body;
         const light = document.getElementById('lightToggle');
         const dark = document.getElementById('darkToggle');
-        const body = document.body;
 
         if (selected === 'light') {
             dark.checked = false;
-            if(light.checked) {
-                body.classList.add('light-mode');
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.classList.remove('light-mode');
-            }
+            body.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
         } else {
             light.checked = false;
-            if(dark.checked) {
-                body.classList.remove('light-mode');
-                localStorage.setItem('theme', 'dark');
-            }
+            body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
         }
     }
 
-    // Set initial toggle state
-    if(localStorage.getItem('theme') === 'light') {
-        document.body.classList.add('light-mode');
-        document.getElementById('lightToggle').checked = true;
-    } else {
-        document.getElementById('darkToggle').checked = true;
-    }
+    // Load saved theme
+    window.onload = function() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if(savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            document.getElementById('darkToggle').checked = true;
+        } else {
+            document.getElementById('lightToggle').checked = true;
+        }
+        displayHistory();
+    };
 
     function showToast(msg) {
         const x = document.getElementById("toast");
@@ -210,19 +249,20 @@
     function generateLink() {
         const id = document.getElementById('idInput').value.trim();
         let url = document.getElementById('urlInput').value.trim();
-        if (!id || !url) { showToast("⚠️ Fill all fields!"); return; }
+        if (!id || !url) { showToast("⚠️ Fill both fields!"); return; }
 
         const finalUrl = `${url}${url.includes('?') ? '&' : '?'}wt.mc_id=studentamb_${id}`;
         document.getElementById('result-box').style.display = 'block';
         document.getElementById("qrcode").innerHTML = ""; 
-        new QRCode(document.getElementById("qrcode"), { text: finalUrl, width: 120, height: 120 });
+        new QRCode(document.getElementById("qrcode"), { text: finalUrl, width: 140, height: 140 });
+        
         saveToHistory(finalUrl);
-        showToast("✅ Generated!");
+        showToast("✅ Link Generated!");
     }
 
     function saveToHistory(url) {
         let history = JSON.parse(localStorage.getItem("mlsa_history")) || [];
-        history.unshift({ url: url, date: new Date().toLocaleDateString() });
+        history.unshift({ url: url });
         localStorage.setItem("mlsa_history", JSON.stringify(history.slice(0, 5)));
         displayHistory();
     }
@@ -233,10 +273,8 @@
         document.getElementById("history-box").style.display = history.length ? "block" : "none";
         list.innerHTML = history.map((item, i) => `
             <div class="history-item">
-                <div class="history-info">
-                    <span class="history-url">${item.url}</span>
-                </div>
-                <button onclick="deleteSingle(${i})" style="background:none; border:none; color:#ff4d4d;"><i class="fas fa-trash"></i></button>
+                <span class="history-url">${item.url}</span>
+                <button onclick="deleteSingle(${i})" style="background:none; border:none; color:#ff4d4d; cursor:pointer;"><i class="fas fa-trash"></i></button>
             </div>`).join('');
     }
 
@@ -250,14 +288,15 @@
     function clearAllHistory() {
         localStorage.removeItem("mlsa_history");
         displayHistory();
+        showToast("🧹 History Cleared!");
     }
 
-    window.onclick = function(event) {
-        if (!event.target.matches('.menu-dots') && !event.target.closest('.dropdown-content')) {
+    // Close menu when clicking outside
+    window.onclick = function(e) {
+        if (!e.target.matches('.menu-dots') && !e.target.closest('.dropdown-content')) {
             document.getElementById('themeMenu').style.display = 'none';
         }
     }
-    displayHistory();
 </script>
 </body>
 </html>
