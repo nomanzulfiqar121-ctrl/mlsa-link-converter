@@ -99,7 +99,8 @@
         /* Result & History */
         #finalLink { font-size: 12px; word-break: break-all; margin-bottom: 15px; color: #00c2ff; text-align: left; background: var(--input-bg); padding: 10px; border-radius: 8px; }
         .history-item { background: var(--input-bg); padding: 12px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box; border-left: 4px solid var(--peach-color); }
-        .history-url { font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 80%; text-align: left; }
+        .history-url { font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 65%; text-align: left; }
+        .history-actions { display: flex; gap: 10px; }
         
         .links-section { margin-top: 30px; text-align: left; width: 100%; border-top: 1px solid var(--border-color); padding-top: 20px; }
         .links-section h4 { font-size: 11px; color: #8892b0; margin-bottom: 10px; }
@@ -166,7 +167,7 @@
     <div id="result-box" style="display:none; margin-top:25px; width: 100%;">
         <div id="finalLink"></div>
         <div id="qrcode" style="display:flex; justify-content:center; margin-bottom:20px;"></div>
-        <button onclick="copyLink()" class="btn" style="background:#fff; color:#000; border: 1px solid #dcdde1;">COPY URL</button>
+        <button onclick="copyLinkText(document.getElementById('finalLink').innerText)" class="btn" style="background:#fff; color:#000; border: 1px solid #dcdde1;">COPY URL</button>
     </div>
 
     <div id="history-box" style="display:none; margin-top:30px; width: 100%;">
@@ -240,6 +241,10 @@
         let url = document.getElementById('urlInput').value.trim();
         if (!id || !url) { showToast("⚠️ Fill both fields!"); return; }
 
+        // 1. Remove locale (e.g., /en-us/, /ur-pk/)
+        url = url.replace(/\/([a-z]{2}-[a-z]{2})\//i, '/');
+        
+        // 2. Fix query parameters (? or &)
         const finalUrl = `${url}${url.includes('?') ? '&' : '?'}wt.mc_id=studentamb_${id}`;
         
         document.getElementById('finalLink').innerText = finalUrl;
@@ -253,24 +258,28 @@
 
     function saveToHistory(url) {
         let history = JSON.parse(localStorage.getItem("mlsa_history")) || [];
-        history.unshift({ url: url });
-        localStorage.setItem("mlsa_history", JSON.stringify(history.slice(0, 5)));
-        displayHistory();
+        if (!history.includes(url)) {
+            history.unshift(url);
+            localStorage.setItem("mlsa_history", JSON.stringify(history.slice(0, 5)));
+            displayHistory();
+        }
     }
 
     function displayHistory() {
         const history = JSON.parse(localStorage.getItem("mlsa_history")) || [];
         const list = document.getElementById("history-list");
         document.getElementById("history-box").style.display = history.length ? "block" : "none";
-        list.innerHTML = history.map((item, i) => `
+        list.innerHTML = history.map((url, i) => `
             <div class="history-item">
-                <span class="history-url">${item.url}</span>
-                <button onclick="deleteSingle(${i})" style="background:none; border:none; color:#ff4d4d; cursor:pointer;"><i class="fas fa-trash"></i></button>
+                <span class="history-url">${url}</span>
+                <div class="history-actions">
+                    <button onclick="copyLinkText('${url}')" style="background:none; border:none; color:#0078d4; cursor:pointer;"><i class="fas fa-copy"></i></button>
+                    <button onclick="deleteSingle(${i})" style="background:none; border:none; color:#ff4d4d; cursor:pointer;"><i class="fas fa-trash"></i></button>
+                </div>
             </div>`).join('');
     }
 
-    function copyLink() {
-        const text = document.getElementById('finalLink').innerText;
+    function copyLinkText(text) {
         navigator.clipboard.writeText(text);
         showToast("📋 Link Copied!");
     }
@@ -285,6 +294,7 @@
     function clearAllHistory() {
         localStorage.removeItem("mlsa_history");
         displayHistory();
+        showToast("🧹 History Cleared!");
     }
 
     window.onclick = function(e) {
