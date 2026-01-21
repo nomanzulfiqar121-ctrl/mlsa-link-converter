@@ -10,13 +10,14 @@
     
     <style>
         :root {
-            --bg-color: #1a1c1e;
+            --bg-color: #f4f7f6;
             --card-bg: #ffffff;
             --text-color: #1a1c1e;
             --input-bg: #f0f2f5;
             --btn-bg: #000000;
             --border-color: #dcdde1;
             --instruction-bg: #ebf5ff;
+            --peach-color: #FFDAB9;
         }
 
         .dark-mode {
@@ -54,19 +55,19 @@
             align-items: center;
         }
 
-        /* 3-Dot Menu ⚪ */
-        .menu-container { position: absolute; left: 25px; top: 25px; z-index: 1000; }
+        /* 3-Dot Menu */
+        .menu-container { position: absolute; left: 25px; top: 25px; z-index: 9999; }
         .menu-dots { background: none; border: none; color: var(--text-color); font-size: 22px; cursor: pointer; padding: 5px; }
         .dropdown-content { 
             display: none; position: absolute; left: 0; top: 35px; 
             background: var(--card-bg); border: 1px solid var(--border-color); 
             padding: 15px; border-radius: 15px; width: 190px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 10000;
         }
         .menu-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .menu-item span { font-size: 14px; font-weight: 500; }
 
-        /* Toggle Switches 🔘 */
+        /* Switches */
         .switch { position: relative; display: inline-block; width: 45px; height: 24px; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
@@ -74,52 +75,41 @@
         input:checked + .slider { background-color: #2196F3; }
         input:checked + .slider:before { transform: translateX(21px); }
 
-        /* Logo Section */
-        .logo-section { margin-bottom: 20px; }
+        /* Logo */
+        .logo-section { margin-bottom: 20px; width: 100%; }
         .arabic-style { font-family: 'Great Vibes', cursive; font-size: 85px; line-height: 1; color: var(--text-color); }
         .english-name { font-family: 'Cinzel', serif; font-size: 24px; letter-spacing: 12px; color: #0078d4; font-weight: bold; display: block; margin-top: 5px; }
 
-        /* Instruction Box 📘 */
+        /* Instruction Box */
         .instruction-box {
             background: var(--instruction-bg); border-radius: 15px; padding: 20px;
             text-align: left; margin-bottom: 25px; width: 100%; box-sizing: border-box;
-            border: 1px solid rgba(0, 120, 212, 0.1);
         }
-        .instruction-box h3 { font-size: 15px; color: #00c2ff; margin: 0 0 10px 0; font-weight: bold; }
-        .instruction-box ol { font-size: 13px; margin: 0; padding-left: 20px; color: #666; line-height: 1.6; }
+        .instruction-box h3 { font-size: 15px; color: #00c2ff; margin: 0 0 10px 0; }
+        .instruction-box ol { font-size: 13px; margin: 0; padding-left: 20px; color: #666; }
         .dark-mode .instruction-box ol { color: #8892b0; }
 
-        /* Inputs ✍️ */
+        /* Inputs */
         .input-group { text-align: left; margin-bottom: 20px; width: 100%; }
-        label { color: #8892b0; font-size: 11px; font-weight: 800; margin-bottom: 8px; display: block; letter-spacing: 1px; }
-        input { 
-            width: 100%; padding: 15px; background: var(--input-bg); 
-            border: 1px solid var(--border-color); border-radius: 12px; 
-            color: var(--text-color); box-sizing: border-box; font-size: 14px;
-        }
+        label { color: #8892b0; font-size: 11px; font-weight: 800; margin-bottom: 8px; display: block; }
+        input { width: 100%; padding: 15px; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-color); box-sizing: border-box; }
 
-        .btn { 
-            width: 100%; padding: 18px; background: var(--btn-bg); 
-            color: white; border: none; border-radius: 12px; 
-            font-weight: bold; cursor: pointer; letter-spacing: 1px;
-            text-transform: uppercase; font-size: 14px; margin-top: 5px;
-        }
+        .btn { width: 100%; padding: 18px; background: var(--btn-bg); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 5px; }
 
-        /* History & Links */
-        .history-item { background: var(--input-bg); padding: 12px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box; }
+        /* Result & History */
+        #finalLink { font-size: 12px; word-break: break-all; margin-bottom: 15px; color: #00c2ff; text-align: left; background: var(--input-bg); padding: 10px; border-radius: 8px; }
+        .history-item { background: var(--input-bg); padding: 12px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box; border-left: 4px solid var(--peach-color); }
         .history-url { font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 80%; text-align: left; }
         
         .links-section { margin-top: 30px; text-align: left; width: 100%; border-top: 1px solid var(--border-color); padding-top: 20px; }
-        .links-section h4 { font-size: 11px; color: #8892b0; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
-        .links-section ul { font-size: 13px; color: #8892b0; padding-left: 18px; line-height: 1.6; }
+        .links-section h4 { font-size: 11px; color: #8892b0; margin-bottom: 10px; }
+        .links-section ul { font-size: 13px; color: #8892b0; padding-left: 18px; }
 
-        /* Footer 👤 */
-        footer { margin-top: 35px; width: 100%; }
-        .dev-credit { font-size: 12px; font-weight: bold; color: var(--text-color); opacity: 0.8; margin-bottom: 12px; }
-        .social-link { background: #f0f2f5; padding: 10px 20px; border-radius: 8px; text-decoration: none; color: #0078d4; font-size: 12px; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; }
-        .dark-mode .social-link { background: #2d3136; }
+        footer { margin-top: 35px; width: 100%; border-top: 1px solid var(--border-color); padding-top: 20px; }
+        .dev-credit { font-size: 12px; font-weight: bold; color: var(--text-color); margin-bottom: 12px; }
+        .social-link { color: #0078d4; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; }
 
-        #toast { visibility: hidden; min-width: 200px; background: #333; color: #fff; text-align: center; border-radius: 10px; padding: 15px; position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); z-index: 2000; }
+        #toast { visibility: hidden; min-width: 200px; background: #333; color: #fff; text-align: center; border-radius: 10px; padding: 15px; position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); z-index: 10001; }
         #toast.show { visibility: visible; animation: fadein 0.5s; }
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 40px; opacity: 1;} }
     </style>
@@ -131,14 +121,14 @@
         <button class="menu-dots" onclick="toggleMenu()"><i class="fas fa-ellipsis-v"></i></button>
         <div id="themeMenu" class="dropdown-content">
             <div class="menu-item">
-                <span><i class="fas fa-sun"></i> Light Mode</span>
+                <span>Light Mode</span>
                 <label class="switch">
                     <input type="checkbox" id="lightToggle" onchange="modeManager('light')">
                     <span class="slider"></span>
                 </label>
             </div>
             <div class="menu-item">
-                <span><i class="fas fa-moon"></i> Dark Mode</span>
+                <span>Dark Mode</span>
                 <label class="switch">
                     <input type="checkbox" id="darkToggle" onchange="modeManager('dark')">
                     <span class="slider"></span>
@@ -174,6 +164,7 @@
     <button class="btn" onclick="generateLink()">Create My Link</button>
 
     <div id="result-box" style="display:none; margin-top:25px; width: 100%;">
+        <div id="finalLink"></div>
         <div id="qrcode" style="display:flex; justify-content:center; margin-bottom:20px;"></div>
         <button onclick="copyLink()" class="btn" style="background:#fff; color:#000; border: 1px solid #dcdde1;">COPY URL</button>
     </div>
@@ -181,13 +172,13 @@
     <div id="history-box" style="display:none; margin-top:30px; width: 100%;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
             <h4 style="font-size:11px; color:#8892b0; margin:0;">RECENT HISTORY</h4>
-            <button onclick="clearAllHistory()" style="background:none; border:none; color:#ff4d4d; font-size:10px; cursor:pointer; font-weight:bold;">CLEAR ALL</button>
+            <button onclick="clearAllHistory()" style="background:none; border:none; color:#ff4d4d; font-size:10px; cursor:pointer;">CLEAR ALL</button>
         </div>
         <div id="history-list"></div>
     </div>
 
     <div class="links-section">
-        <h4>Eligible Reference URLs</h4>
+        <h4>ELIGIBLE REFERENCE URLS</h4>
         <ul>
             <li>learn.microsoft.com</li>
             <li>developer.microsoft.com</li>
@@ -206,7 +197,6 @@
 <div id="toast"></div>
 
 <script>
-    // Menu & Theme Logic 🌓
     function toggleMenu() {
         const menu = document.getElementById('themeMenu');
         menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
@@ -228,7 +218,6 @@
         }
     }
 
-    // Load saved theme
     window.onload = function() {
         const savedTheme = localStorage.getItem('theme') || 'light';
         if(savedTheme === 'dark') {
@@ -252,12 +241,14 @@
         if (!id || !url) { showToast("⚠️ Fill both fields!"); return; }
 
         const finalUrl = `${url}${url.includes('?') ? '&' : '?'}wt.mc_id=studentamb_${id}`;
+        
+        document.getElementById('finalLink').innerText = finalUrl;
         document.getElementById('result-box').style.display = 'block';
         document.getElementById("qrcode").innerHTML = ""; 
         new QRCode(document.getElementById("qrcode"), { text: finalUrl, width: 140, height: 140 });
         
         saveToHistory(finalUrl);
-        showToast("✅ Link Generated!");
+        showToast("✅ Generated!");
     }
 
     function saveToHistory(url) {
@@ -278,6 +269,12 @@
             </div>`).join('');
     }
 
+    function copyLink() {
+        const text = document.getElementById('finalLink').innerText;
+        navigator.clipboard.writeText(text);
+        showToast("📋 Link Copied!");
+    }
+
     function deleteSingle(i) {
         let h = JSON.parse(localStorage.getItem("mlsa_history"));
         h.splice(i, 1);
@@ -288,10 +285,8 @@
     function clearAllHistory() {
         localStorage.removeItem("mlsa_history");
         displayHistory();
-        showToast("🧹 History Cleared!");
     }
 
-    // Close menu when clicking outside
     window.onclick = function(e) {
         if (!e.target.matches('.menu-dots') && !e.target.closest('.dropdown-content')) {
             document.getElementById('themeMenu').style.display = 'none';
