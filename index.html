@@ -10,12 +10,26 @@
     
     <style>
         :root {
-            --primary-color: #0078d4;
-            --bg-color: #1a1c1e; 
-            --card-color: #25282c; 
+            /* Dark Mode (Default) 🌑 */
+            --bg-color: #1a1c1e;
+            --card-bg: #25282c;
+            --text-color: #ffffff;
             --input-bg: #121416;
-            --peach-color: #FFDAB9; 
+            --btn-bg: linear-gradient(135deg, #0078d4 0%, #00c2ff 100%);
+            --peach-color: #FFDAB9;
+            --border-color: #33383e;
         }
+
+        .light-mode {
+            /* Light Mode ☀️ */
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #1a1c1e;
+            --input-bg: #f0f2f5;
+            --btn-bg: #000000; /* Aapka Black Button 🖤 */
+            --border-color: #dcdde1;
+        }
+
         body {
             font-family: 'Segoe UI', sans-serif;
             margin: 0;
@@ -23,173 +37,154 @@
             display: flex;
             justify-content: center;
             background: var(--bg-color);
-            color: white;
+            color: var(--text-color);
+            transition: 0.3s;
         }
+
         .card {
-            background: var(--card-color);
+            background: var(--card-bg);
             padding: 35px;
             border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
             width: 100%;
             max-width: 450px;
             text-align: center;
-            border: 1px solid #33383e;
+            border: 1px solid var(--border-color);
         }
+
+        /* Logo & Inputs */
+        .arabic-style { font-family: 'Great Vibes', cursive; font-size: 75px; color: var(--text-color); }
+        .english-name { font-family: 'Cinzel', serif; font-size: 22px; letter-spacing: 10px; color: #0078d4; }
         
-        .logo-section { margin-bottom: 35px; }
-        .arabic-style { font-family: 'Great Vibes', cursive; font-size: 75px; line-height: 1; margin-bottom: -10px; color: #ffffff; display: block; }
-        .english-name { font-family: 'Cinzel', serif; font-size: 22px; letter-spacing: 10px; color: #0078d4; text-transform: uppercase; padding-top: 10px; display: inline-block; }
+        input { 
+            width: 100%; padding: 14px; background: var(--input-bg); 
+            border: 1px solid var(--border-color); border-radius: 10px; 
+            color: var(--text-color); margin-top: 5px;
+        }
 
-        .instruction-box { background: rgba(0, 120, 212, 0.08); border-radius: 12px; padding: 15px; text-align: left; margin-bottom: 25px; border: 1px solid rgba(0, 120, 212, 0.2); }
-        .instruction-box h3 { font-size: 13px; margin: 0 0 8px 0; color: #00c2ff; }
-        .instruction-box ol { font-size: 13px; margin: 0; padding-left: 18px; color: #bdc3c7; }
+        .btn { 
+            width: 100%; padding: 16px; background: var(--btn-bg); 
+            color: white; border: none; border-radius: 12px; 
+            font-weight: bold; cursor: pointer; margin-top: 15px;
+            text-transform: uppercase;
+        }
 
-        .input-group { text-align: left; margin-bottom: 18px; }
-        label { color: #8892b0; font-size: 11px; font-weight: bold; margin-bottom: 6px; display: block; letter-spacing: 1.5px; }
-        input { width: 100%; padding: 14px; background: var(--input-bg); border: 1px solid #3d444d; border-radius: 10px; color: white; box-sizing: border-box; transition: 0.3s; }
-        input:focus { border-color: var(--primary-color); outline: none; }
-        
-        .btn { width: 100%; padding: 16px; background: linear-gradient(135deg, #0078d4 0%, #00c2ff 100%); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; text-transform: uppercase; }
+        /* History & Items */
+        .history-item { 
+            background: var(--input-bg); padding: 12px; border-radius: 10px; 
+            margin-bottom: 10px; border-left: 3px solid var(--peach-color); 
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .history-url { color: var(--text-color) !important; font-size: 11px; }
 
-        #result-box { margin-top: 25px; padding: 20px; background: #121416; border-radius: 12px; display: none; border: 1px solid #0078d4; }
-        .final-url { color: #00c2ff; word-break: break-all; font-size: 13px; margin-bottom: 15px; }
+        /* Floating Theme Toggle 🌓 */
+        .theme-toggle {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 50px; height: 50px; border-radius: 50%;
+            background: var(--btn-bg); color: white;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: none; z-index: 1000;
+        }
 
-        #qrcode img { border: 10px solid white; border-radius: 8px; margin: 20px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-
-        .history-item { background: #121416; padding: 12px; border-radius: 10px; margin-bottom: 10px; border-left: 3px solid var(--peach-color); display: flex; justify-content: space-between; align-items: center; }
-        .history-info { text-align: left; flex-grow: 1; margin-right: 10px; overflow: hidden; }
-        .history-date { font-size: 10px; color: #8892b0; display: block; }
-        .history-url { font-size: 11px; color: #ffffff !important; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; display: block; }
-
-        .history-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .clear-btn { background: none; border: none; color: #ff4d4d; font-size: 10px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
-
-        /* Toast Styling 🔔 */
-        #toast { visibility: hidden; min-width: 200px; background-color: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; z-index: 1000; left: 50%; bottom: 30px; transform: translateX(-50%); font-size: 13px; border: 1px solid var(--peach-color); }
+        /* Toast 🔔 */
+        #toast { visibility: hidden; min-width: 200px; background: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%); border: 1px solid var(--peach-color); }
         #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
-
-        .links-section { margin-top: 30px; text-align: left; font-size: 12px; border-top: 1px solid #33383e; padding-top: 20px; }
-        .links-section h4 { color: #bdc3c7; margin-bottom: 10px; text-transform: uppercase; font-size: 11px; }
-        .links-section ul { color: #666; padding-left: 20px; margin: 0; }
-
-        footer { margin-top: 30px; border-top: 1px solid #33383e; padding-top: 20px; }
-        .dev-credit { color: #ffffff; font-size: 11px; margin-bottom: 10px; letter-spacing: 1px; font-weight: bold; }
-        .social-links a { color: #8892b0; text-decoration: none; font-size: 12px; font-weight: bold; display: block; margin-top: 10px; }
     </style>
 </head>
-<body>
+<body class="dark-mode">
+
+<button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
+    <i class="fas fa-sun"></i>
+</button>
 
 <div class="card">
-    <div class="logo-section">
-        <span class="arabic-style">Noman</span>
-        <div class="english-name">NOMAN</div>
+    <span class="arabic-style">Noman</span><br>
+    <div class="english-name">NOMAN</div>
+
+    <div class="input-group" style="text-align:left; margin-top:30px;">
+        <label style="font-size:11px; color:#8892b0;">CONTRIBUTOR ID</label>
+        <input type="text" id="idInput" placeholder="e.g. 502891">
     </div>
 
-    <div class="instruction-box">
-        <h3>How to use:</h3>
-        <ol>
-            <li>Paste your Microsoft Learn URL.</li>
-            <li>Enter your 6-digit Contributor ID.</li>
-            <li>Convert and share your link!</li>
-        </ol>
-    </div>
-
-    <div class="input-group">
-        <label>YOUR CONTRIBUTOR ID</label>
-        <input type="text" id="idInput" placeholder="Enter ID (e.g. 502891)">
-    </div>
-
-    <div class="input-group">
-        <label>MICROSOFT LEARN LINK</label>
+    <div class="input-group" style="text-align:left; margin-top:15px;">
+        <label style="font-size:11px; color:#8892b0;">MICROSOFT LEARN LINK</label>
         <input type="text" id="urlInput" placeholder="Paste link here...">
     </div>
     
     <button class="btn" onclick="generateLink()">Create My Link</button>
 
-    <div id="result-box">
-        <label style="color:#8892b0">READY LINK:</label>
-        <div id="finalLink" class="final-url"></div>
-        <div id="qrcode" style="display: flex; justify-content: center;"></div>
-        <button onclick="copyLink()" style="background:#fff; color:#000; border:none; padding:10px 25px; border-radius:8px; cursor:pointer; font-weight:bold; margin-top: 10px;">COPY URL</button>
+    <div id="result-box" style="display:none; margin-top:20px; background:var(--input-bg); padding:15px; border-radius:12px;">
+        <div id="finalLink" style="font-size:12px; word-break:break-all; margin-bottom:10px;"></div>
+        <div id="qrcode" style="display:flex; justify-content:center;"></div>
+        <button onclick="copyLink()" class="btn" style="background:#fff; color:#000; padding:10px; font-size:12px;">Copy Link</button>
     </div>
 
-    <div id="history-box" style="margin-top: 25px; text-align: left; display: none;">
-        <div class="history-header">
-            <h4 style="color: var(--peach-color); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; margin: 0;">Recent History</h4>
-            <button class="clear-btn" onclick="clearAllHistory()">Clear All</button>
+    <div id="history-box" style="display:none; margin-top:25px; text-align:left;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <h4 style="font-size:11px; color:var(--peach-color);">RECENT HISTORY</h4>
+            <button onclick="clearAllHistory()" style="background:none; border:none; color:#ff4d4d; font-size:10px; cursor:pointer;">CLEAR ALL</button>
         </div>
         <div id="history-list"></div>
     </div>
-
-    <div class="links-section">
-        <h4>Eligible Reference URLs</h4>
-        <ul>
-            <li>learn.microsoft.com</li>
-            <li>developer.microsoft.com</li>
-            <li>azure.microsoft.com</li>
-        </ul>
-    </div>
-
-    <footer>
-        <div class="dev-credit">Designed and Developed by Noman Zulfiqar</div>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/noman-zulfiqar-0916833a4" target="_blank">
-                <i class="fab fa-linkedin"></i> CONNECT ON LINKEDIN
-            </a>
-        </div>
-    </footer>
 </div>
 
-<div id="toast">Message here...</div>
+<div id="toast"></div>
 
 <script>
-    window.onload = function() { displayHistory(); };
+    // Theme Logic 🌓
+    function toggleTheme() {
+        const body = document.body;
+        const btn = document.getElementById("themeBtn");
+        body.classList.toggle("light-mode");
+        
+        if(body.classList.contains("light-mode")) {
+            btn.innerHTML = '<i class="fas fa-moon"></i>';
+            localStorage.setItem("theme", "light");
+        } else {
+            btn.innerHTML = '<i class="fas fa-sun"></i>';
+            localStorage.setItem("theme", "dark");
+        }
+    }
+
+    // Load Saved Theme
+    if(localStorage.getItem("theme") === "light") { toggleTheme(); }
 
     function showToast(msg) {
         const x = document.getElementById("toast");
-        x.innerText = msg;
-        x.className = "show";
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        x.innerText = msg; x.className = "show";
+        setTimeout(() => { x.className = ""; }, 3000);
     }
 
-    // 🛡️ URL Validation
     function isValidUrl(url) {
-        const allowed = ["learn.microsoft.com", "developer.microsoft.com", "azure.microsoft.com"];
-        return allowed.some(domain => url.includes(domain));
+        return ["learn.microsoft.com", "developer.microsoft.com", "azure.microsoft.com"].some(d => url.includes(d));
     }
 
     function generateLink() {
         const id = document.getElementById('idInput').value.trim();
         let url = document.getElementById('urlInput').value.trim();
         
-        if (!id || !url) { showToast("⚠️ Dono boxes bharna zaroori hain!"); return; }
-        if (!isValidUrl(url)) { showToast("❌ Sirf Microsoft ke links allow hain!"); return; }
+        if (!id || !url) { showToast("⚠️ Fill all fields!"); return; }
+        if (!isValidUrl(url)) { showToast("❌ Only Microsoft links allowed!"); return; }
 
         url = url.replace(/\/[a-z]{2}-[a-z]{2}\//i, '/');
-        const separator = url.includes('?') ? '&' : '?';
-        const finalUrl = `${url}${separator}wt.mc_id=studentamb_${id}`;
+        const finalUrl = `${url}${url.includes('?') ? '&' : '?'}wt.mc_id=studentamb_${id}`;
         
         document.getElementById('finalLink').innerText = finalUrl;
         document.getElementById('result-box').style.display = 'block';
-
         document.getElementById("qrcode").innerHTML = ""; 
-        new QRCode(document.getElementById("qrcode"), { text: finalUrl, width: 150, height: 150 });
+        new QRCode(document.getElementById("qrcode"), { text: finalUrl, width: 120, height: 120 });
 
         saveToHistory(finalUrl);
-        showToast("✅ Link Generate Ho Gaya!");
+        showToast("✅ Generated!");
     }
 
     function saveToHistory(newUrl) {
         let history = JSON.parse(localStorage.getItem("mlsa_history")) || [];
-        const now = new Date();
-        const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
-        const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-
-        history.unshift({ url: newUrl, date: dateStr, time: timeStr });
+        history.unshift({ url: newUrl, date: new Date().toLocaleDateString() });
         if (history.length > 5) history.pop();
-
         localStorage.setItem("mlsa_history", JSON.stringify(history));
         displayHistory();
     }
@@ -204,48 +199,31 @@
         listDiv.innerHTML = ""; 
 
         history.forEach((item, index) => {
-            const itemHtml = `
+            listDiv.innerHTML += `
                 <div class="history-item">
-                    <div class="history-info">
-                        <span class="history-url">${item.url}</span>
-                        <span class="history-date">${item.date} | ${item.time}</span>
-                    </div>
-                    <div style="display:flex; gap:10px;">
-                        <button onclick="copySpecific('${item.url}')" style="background:none; border:none; color:#FFDAB9; cursor:pointer;"><i class="fas fa-copy"></i></button>
+                    <div style="overflow:hidden;"><span class="history-url">${item.url}</span></div>
+                    <div style="display:flex; gap:10px; margin-left:10px;">
                         <button onclick="deleteSingle(${index})" style="background:none; border:none; color:#ff4d4d; cursor:pointer;"><i class="fas fa-trash"></i></button>
                     </div>
-                </div>
-            `;
-            listDiv.innerHTML += itemHtml;
+                </div>`;
         });
     }
 
-    // 🚮 Individual Delete
     function deleteSingle(index) {
-        let history = JSON.parse(localStorage.getItem("mlsa_history"));
-        history.splice(index, 1);
-        localStorage.setItem("mlsa_history", JSON.stringify(history));
+        let h = JSON.parse(localStorage.getItem("mlsa_history"));
+        h.splice(index, 1);
+        localStorage.setItem("mlsa_history", JSON.stringify(h));
         displayHistory();
-        showToast("🗑️ Link Delete Ho Gaya!");
+        showToast("🗑️ Deleted!");
     }
 
     function clearAllHistory() {
-        if (confirm("Poori history saaf karein?")) {
-            localStorage.removeItem("mlsa_history");
-            displayHistory();
-            showToast("🧹 History Clear!");
-        }
-    }
-
-    function copySpecific(text) {
-        navigator.clipboard.writeText(text);
-        showToast("📋 Link Copied!");
+        if(confirm("Clear everything?")) { localStorage.removeItem("mlsa_history"); displayHistory(); showToast("🧹 Cleared!"); }
     }
 
     function copyLink() {
-        const linkText = document.getElementById('finalLink').innerText;
-        navigator.clipboard.writeText(linkText);
-        showToast("📋 URL Copied!");
+        navigator.clipboard.writeText(document.getElementById('finalLink').innerText);
+        showToast("📋 Copied!");
     }
 </script>
 </body>
