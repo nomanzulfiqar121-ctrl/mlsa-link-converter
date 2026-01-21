@@ -14,6 +14,7 @@
             --bg-color: #1a1c1e; 
             --card-color: #25282c; 
             --input-bg: #121416;
+            --peach-color: #FFDAB9; /* Naya Peach Color 🍑 */
         }
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -109,20 +110,27 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        /* History Styling 📜 */
+        /* Updated History Styling 📜 */
         .history-item {
             background: #121416;
             padding: 12px;
             border-radius: 10px;
             margin-bottom: 10px;
-            border-left: 3px solid #0078d4;
+            border-left: 3px solid var(--peach-color); /* Peach Border 🍑 */
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .history-info { text-align: left; flex-grow: 1; margin-right: 10px; overflow: hidden; }
         .history-date { font-size: 10px; color: #8892b0; display: block; }
-        .history-url { font-size: 11px; color: #00c2ff; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; display: block; }
+        .history-url { 
+            font-size: 11px; 
+            color: #ffffff !important; /* White URL ⚪ */
+            overflow: hidden; 
+            white-space: nowrap; 
+            text-overflow: ellipsis; 
+            display: block; 
+        }
 
         .links-section {
             margin-top: 30px;
@@ -185,7 +193,7 @@
     </div>
 
     <div id="history-box" style="margin-top: 25px; text-align: left; display: none;">
-        <h4 style="color: #8892b0; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 15px;">Recent History (Last 5)</h4>
+        <h4 style="color: var(--peach-color); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 15px;">Recent History (Last 5)</h4>
         <div id="history-list">
             </div>
     </div>
@@ -210,7 +218,6 @@
 </div>
 
 <script>
-    // Page load hote hi history dikhane ke liye
     window.onload = function() {
         displayHistory();
     };
@@ -231,7 +238,6 @@
         document.getElementById('finalLink').innerText = finalUrl;
         document.getElementById('result-box').style.display = 'block';
 
-        // QR Code
         document.getElementById("qrcode").innerHTML = ""; 
         new QRCode(document.getElementById("qrcode"), {
             text: finalUrl,
@@ -241,23 +247,17 @@
             colorLight : "#ffffff"
         });
 
-        // --- History Save Logic ---
         saveToHistory(finalUrl);
     }
 
     function saveToHistory(newUrl) {
         let history = JSON.parse(localStorage.getItem("mlsa_history")) || [];
-        
         const now = new Date();
         const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
         const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
 
         const newEntry = { url: newUrl, date: dateStr, time: timeStr };
-
-        // Naya link shuru mein add karein
         history.unshift(newEntry);
-
-        // Sirf 5 links rakhein
         if (history.length > 5) history.pop();
 
         localStorage.setItem("mlsa_history", JSON.stringify(history));
@@ -275,7 +275,7 @@
         }
 
         box.style.display = "block";
-        listDiv.innerHTML = ""; // Purani list saaf karein
+        listDiv.innerHTML = ""; 
 
         history.forEach((item) => {
             const itemHtml = `
@@ -284,7 +284,7 @@
                         <span class="history-url">${item.url}</span>
                         <span class="history-date">${item.date} | ${item.time}</span>
                     </div>
-                    <button onclick="copySpecific('${item.url}')" style="background:none; border:none; color:#8892b0; cursor:pointer;">
+                    <button onclick="copySpecific('${item.url}')" style="background:none; border:none; color:#FFDAB9; cursor:pointer;">
                         <i class="fas fa-copy"></i>
                     </button>
                 </div>
