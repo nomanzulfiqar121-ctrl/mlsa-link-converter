@@ -10,7 +10,6 @@
     
     <style>
         :root {
-            /* Dark Mode (Default) 🌑 */
             --bg-color: #1a1c1e;
             --card-bg: #25282c;
             --text-color: #ffffff;
@@ -22,12 +21,11 @@
         }
 
         .light-mode {
-            /* Light Mode ☀️ */
             --bg-color: #f4f7f6;
             --card-bg: #ffffff;
             --text-color: #1a1c1e;
             --input-bg: #f0f2f5;
-            --btn-bg: #000000; /* Aapka Black Button 🖤 */
+            --btn-bg: #000000;
             --border-color: #dcdde1;
             --instruction-bg: rgba(0, 120, 212, 0.05);
         }
@@ -58,7 +56,6 @@
         .arabic-style { font-family: 'Great Vibes', cursive; font-size: 75px; line-height: 1; margin-bottom: -10px; color: var(--text-color); display: block; }
         .english-name { font-family: 'Cinzel', serif; font-size: 22px; letter-spacing: 10px; color: #0078d4; text-transform: uppercase; padding-top: 10px; display: inline-block; }
 
-        /* Instruction Box 📘 */
         .instruction-box {
             background: var(--instruction-bg);
             border-radius: 12px;
@@ -86,29 +83,25 @@
             text-transform: uppercase;
         }
 
-        /* History Styling */
         .history-item { 
             background: var(--input-bg); padding: 12px; border-radius: 10px; 
             margin-bottom: 10px; border-left: 3px solid var(--peach-color); 
             display: flex; justify-content: space-between; align-items: center;
         }
-        .history-url { font-size: 11px; color: var(--text-color) !important; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; display: block; }
-        .history-date { font-size: 10px; color: #8892b0; display: block; }
+        .history-url { font-size: 11px; color: var(--text-color) !important; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; display: block; text-align: left;}
+        .history-date { font-size: 10px; color: #8892b0; display: block; text-align: left;}
 
-        /* Eligible URLs Section 🔗 */
         .links-section {
             margin-top: 30px; text-align: left; font-size: 12px;
             border-top: 1px solid var(--border-color); padding-top: 20px;
         }
         .links-section h4 { color: #bdc3c7; margin-bottom: 10px; text-transform: uppercase; font-size: 11px; }
-        .links-section ul { color: #666; padding-left: 20px; margin: 0; }
+        .links-section ul { color: #8892b0; padding-left: 20px; margin: 0; }
 
-        /* Footer & Credits 👤 */
         footer { margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 20px; }
         .dev-credit { color: var(--text-color); font-size: 11px; margin-bottom: 10px; letter-spacing: 1px; font-weight: bold; opacity: 0.8; }
         .social-links a { color: #8892b0; text-decoration: none; font-size: 12px; font-weight: bold; display: block; margin-top: 10px; }
 
-        /* Floating Theme Toggle 🌓 */
         .theme-toggle {
             position: fixed; bottom: 30px; right: 30px;
             width: 50px; height: 50px; border-radius: 50%;
@@ -118,7 +111,6 @@
             border: none; z-index: 1000;
         }
 
-        /* Toast 🔔 */
         #toast { visibility: hidden; min-width: 200px; background: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%); border: 1px solid var(--peach-color); z-index: 1001; }
         #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
@@ -140,7 +132,7 @@
     <div class="instruction-box">
         <h3>How to use:</h3>
         <ol>
-            <li>Paste your Microsoft Learn URL.</li>
+            <li>Paste any URL you want to convert.</li>
             <li>Enter your 6-digit Contributor ID.</li>
             <li>Convert and share your link!</li>
         </ol>
@@ -152,7 +144,7 @@
     </div>
 
     <div class="input-group">
-        <label>MICROSOFT LEARN LINK</label>
+        <label>TARGET URL</label>
         <input type="text" id="urlInput" placeholder="Paste link here...">
     </div>
     
@@ -160,7 +152,7 @@
 
     <div id="result-box" style="display:none; margin-top:20px; background:var(--input-bg); padding:15px; border-radius:12px; border: 1px solid #0078d4;">
         <label style="color:#8892b0; font-size: 11px; display: block; text-align: left; margin-bottom: 5px;">READY LINK:</label>
-        <div id="finalLink" style="font-size:12px; word-break:break-all; margin-bottom:15px; color: #00c2ff;"></div>
+        <div id="finalLink" style="font-size:12px; word-break:break-all; margin-bottom:15px; color: #00c2ff; text-align: left;"></div>
         <div id="qrcode" style="display:flex; justify-content:center;"></div>
         <button onclick="copyLink()" class="btn" style="background:#fff; color:#000; padding:10px; font-size:12px; margin-top: 15px;">COPY URL</button>
     </div>
@@ -174,11 +166,10 @@
     </div>
 
     <div class="links-section">
-        <h4>Eligible Reference URLs</h4>
+        <h4>Note</h4>
         <ul>
-            <li>learn.microsoft.com</li>
-            <li>developer.microsoft.com</li>
-            <li>azure.microsoft.com</li>
+            <li>You can now convert any URL.</li>
+            <li>Tracking ID will be appended at the end.</li>
         </ul>
     </div>
 
@@ -195,7 +186,6 @@
 <div id="toast"></div>
 
 <script>
-    // Theme Logic 🌓
     function toggleTheme() {
         const body = document.body;
         const btn = document.getElementById("themeBtn");
@@ -223,19 +213,18 @@
         setTimeout(() => { x.className = ""; }, 3000);
     }
 
-    function isValidUrl(url) {
-        return ["learn.microsoft.com", "developer.microsoft.com", "azure.microsoft.com"].some(d => url.includes(d));
-    }
-
+    // generateLink function se URL Guard (validation) hata di gayi hai 🛡️❌
     function generateLink() {
         const id = document.getElementById('idInput').value.trim();
         let url = document.getElementById('urlInput').value.trim();
         
         if (!id || !url) { showToast("⚠️ Dono boxes bharna zaroori hain!"); return; }
-        if (!isValidUrl(url)) { showToast("❌ Sirf Microsoft links allow hain!"); return; }
 
+        // Locale remove karne ka logic abhi bhi hai (e.g. /en-us/)
         url = url.replace(/\/[a-z]{2}-[a-z]{2}\//i, '/');
-        const finalUrl = `${url}${url.includes('?') ? '&' : '?'}wt.mc_id=studentamb_${id}`;
+        
+        const separator = url.includes('?') ? '&' : '?';
+        const finalUrl = `${url}${separator}wt.mc_id=studentamb_${id}`;
         
         document.getElementById('finalLink').innerText = finalUrl;
         document.getElementById('result-box').style.display = 'block';
@@ -273,7 +262,7 @@
         history.forEach((item, index) => {
             listDiv.innerHTML += `
                 <div class="history-item">
-                    <div style="overflow:hidden; text-align: left;">
+                    <div style="overflow:hidden; text-align: left; flex: 1;">
                         <span class="history-url">${item.url}</span>
                         <span class="history-date">${item.date}</span>
                     </div>
