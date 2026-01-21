@@ -18,6 +18,7 @@
             --border-color: #dcdde1;
             --instruction-bg: #ebf5ff;
             --peach-color: #FFDAB9;
+            --copy-btn-bg: #000000; /* Light Mode Copy Button Black 🖤 */
         }
 
         .dark-mode {
@@ -28,6 +29,7 @@
             --btn-bg: #0078d4;
             --border-color: #33383e;
             --instruction-bg: rgba(0, 120, 212, 0.1);
+            --copy-btn-bg: #0078d4; /* Dark Mode Copy Button Blue 💙 */
         }
 
         body {
@@ -55,7 +57,6 @@
             align-items: center;
         }
 
-        /* 3-Dot Menu */
         .menu-container { position: absolute; left: 25px; top: 25px; z-index: 9999; }
         .menu-dots { background: none; border: none; color: var(--text-color); font-size: 22px; cursor: pointer; padding: 5px; }
         .dropdown-content { 
@@ -67,7 +68,6 @@
         }
         .menu-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 
-        /* Switches */
         .switch { position: relative; display: inline-block; width: 45px; height: 24px; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
@@ -75,12 +75,10 @@
         input:checked + .slider { background-color: #2196F3; }
         input:checked + .slider:before { transform: translateX(21px); }
 
-        /* Logo */
         .logo-section { margin-bottom: 20px; width: 100%; }
         .arabic-style { font-family: 'Great Vibes', cursive; font-size: 85px; line-height: 1; color: var(--text-color); }
         .english-name { font-family: 'Cinzel', serif; font-size: 24px; letter-spacing: 12px; color: #0078d4; font-weight: bold; display: block; margin-top: 5px; }
 
-        /* Instruction Box */
         .instruction-box {
             background: var(--instruction-bg); border-radius: 15px; padding: 20px;
             text-align: left; margin-bottom: 25px; width: 100%; box-sizing: border-box;
@@ -89,14 +87,19 @@
         .instruction-box ol { font-size: 13px; margin: 0; padding-left: 20px; color: #666; }
         .dark-mode .instruction-box ol { color: #8892b0; }
 
-        /* Inputs */
         .input-group { text-align: left; margin-bottom: 20px; width: 100%; }
         label { color: #8892b0; font-size: 11px; font-weight: 800; margin-bottom: 8px; display: block; }
         input { width: 100%; padding: 15px; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-color); box-sizing: border-box; }
 
         .btn { width: 100%; padding: 18px; background: var(--btn-bg); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 5px; }
 
-        /* Result & History */
+        /* Dynamic Copy Button Color 🎨 */
+        #result-box .copy-btn {
+            background-color: var(--copy-btn-bg) !important;
+            color: white !important;
+            border: none !important;
+        }
+
         #finalLink { font-size: 12px; word-break: break-all; margin-bottom: 15px; color: #00c2ff; text-align: left; background: var(--input-bg); padding: 10px; border-radius: 8px; }
         .history-item { background: var(--input-bg); padding: 12px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box; border-left: 4px solid var(--peach-color); }
         .history-url { font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 65%; text-align: left; }
@@ -167,7 +170,7 @@
     <div id="result-box" style="display:none; margin-top:25px; width: 100%;">
         <div id="finalLink"></div>
         <div id="qrcode" style="display:flex; justify-content:center; margin-bottom:20px;"></div>
-        <button onclick="copyLinkText(document.getElementById('finalLink').innerText)" class="btn" style="background:#fff; color:#000; border: 1px solid #dcdde1;">COPY URL</button>
+        <button onclick="copyLinkText(document.getElementById('finalLink').innerText)" class="btn copy-btn">COPY URL</button>
     </div>
 
     <div id="history-box" style="display:none; margin-top:30px; width: 100%;">
@@ -241,10 +244,8 @@
         let url = document.getElementById('urlInput').value.trim();
         if (!id || !url) { showToast("⚠️ Fill both fields!"); return; }
 
-        // 1. Remove locale (e.g., /en-us/, /ur-pk/)
+        // Clean locale and fix double markers
         url = url.replace(/\/([a-z]{2}-[a-z]{2})\//i, '/');
-        
-        // 2. Fix query parameters (? or &)
         const finalUrl = `${url}${url.includes('?') ? '&' : '?'}wt.mc_id=studentamb_${id}`;
         
         document.getElementById('finalLink').innerText = finalUrl;
@@ -294,7 +295,6 @@
     function clearAllHistory() {
         localStorage.removeItem("mlsa_history");
         displayHistory();
-        showToast("🧹 History Cleared!");
     }
 
     window.onclick = function(e) {
