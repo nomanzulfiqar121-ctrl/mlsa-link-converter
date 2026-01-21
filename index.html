@@ -37,125 +37,40 @@
         }
         
         .logo-section { margin-bottom: 35px; }
-        .arabic-style {
-            font-family: 'Great Vibes', cursive;
-            font-size: 75px;
-            line-height: 1;
-            margin-bottom: -10px;
-            color: #ffffff;
-            display: block;
-        }
-        .english-name {
-            font-family: 'Cinzel', serif;
-            font-size: 22px;
-            letter-spacing: 10px;
-            color: #0078d4;
-            text-transform: uppercase;
-            padding-top: 10px;
-            display: inline-block;
-        }
+        .arabic-style { font-family: 'Great Vibes', cursive; font-size: 75px; line-height: 1; margin-bottom: -10px; color: #ffffff; display: block; }
+        .english-name { font-family: 'Cinzel', serif; font-size: 22px; letter-spacing: 10px; color: #0078d4; text-transform: uppercase; padding-top: 10px; display: inline-block; }
 
-        .instruction-box {
-            background: rgba(0, 120, 212, 0.08);
-            border-radius: 12px;
-            padding: 15px;
-            text-align: left;
-            margin-bottom: 25px;
-            border: 1px solid rgba(0, 120, 212, 0.2);
-        }
+        .instruction-box { background: rgba(0, 120, 212, 0.08); border-radius: 12px; padding: 15px; text-align: left; margin-bottom: 25px; border: 1px solid rgba(0, 120, 212, 0.2); }
         .instruction-box h3 { font-size: 13px; margin: 0 0 8px 0; color: #00c2ff; }
         .instruction-box ol { font-size: 13px; margin: 0; padding-left: 18px; color: #bdc3c7; }
 
         .input-group { text-align: left; margin-bottom: 18px; }
         label { color: #8892b0; font-size: 11px; font-weight: bold; margin-bottom: 6px; display: block; letter-spacing: 1.5px; }
-        input {
-            width: 100%;
-            padding: 14px;
-            background: var(--input-bg);
-            border: 1px solid #3d444d;
-            border-radius: 10px;
-            color: white;
-            box-sizing: border-box;
-            transition: 0.3s;
-        }
+        input { width: 100%; padding: 14px; background: var(--input-bg); border: 1px solid #3d444d; border-radius: 10px; color: white; box-sizing: border-box; transition: 0.3s; }
         input:focus { border-color: var(--primary-color); outline: none; }
         
-        .btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #0078d4 0%, #00c2ff 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-            text-transform: uppercase;
-        }
+        .btn { width: 100%; padding: 16px; background: linear-gradient(135deg, #0078d4 0%, #00c2ff 100%); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; text-transform: uppercase; }
 
-        #result-box {
-            margin-top: 25px;
-            padding: 20px;
-            background: #121416;
-            border-radius: 12px;
-            display: none;
-            border: 1px solid #0078d4;
-        }
+        #result-box { margin-top: 25px; padding: 20px; background: #121416; border-radius: 12px; display: none; border: 1px solid #0078d4; }
         .final-url { color: #00c2ff; word-break: break-all; font-size: 13px; margin-bottom: 15px; }
 
-        #qrcode img {
-            border: 10px solid white;
-            border-radius: 8px;
-            margin: 20px auto;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
+        #qrcode img { border: 10px solid white; border-radius: 8px; margin: 20px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
 
-        .history-item {
-            background: #121416;
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            border-left: 3px solid var(--peach-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .history-item { background: #121416; padding: 12px; border-radius: 10px; margin-bottom: 10px; border-left: 3px solid var(--peach-color); display: flex; justify-content: space-between; align-items: center; }
         .history-info { text-align: left; flex-grow: 1; margin-right: 10px; overflow: hidden; }
         .history-date { font-size: 10px; color: #8892b0; display: block; }
-        .history-url { 
-            font-size: 11px; 
-            color: #ffffff !important; 
-            overflow: hidden; 
-            white-space: nowrap; 
-            text-overflow: ellipsis; 
-            display: block; 
-        }
+        .history-url { font-size: 11px; color: #ffffff !important; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; display: block; }
 
-        /* History Header Flexbox 📐 */
-        .history-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .clear-btn {
-            background: none;
-            border: none;
-            color: #ff4d4d;
-            font-size: 10px;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: bold;
-        }
+        .history-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .clear-btn { background: none; border: none; color: #ff4d4d; font-size: 10px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
 
-        .links-section {
-            margin-top: 30px;
-            text-align: left;
-            font-size: 12px;
-            border-top: 1px solid #33383e;
-            padding-top: 20px;
-        }
+        /* Toast Styling 🔔 */
+        #toast { visibility: hidden; min-width: 200px; background-color: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; z-index: 1000; left: 50%; bottom: 30px; transform: translateX(-50%); font-size: 13px; border: 1px solid var(--peach-color); }
+        #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+
+        .links-section { margin-top: 30px; text-align: left; font-size: 12px; border-top: 1px solid #33383e; padding-top: 20px; }
         .links-section h4 { color: #bdc3c7; margin-bottom: 10px; text-transform: uppercase; font-size: 11px; }
         .links-section ul { color: #666; padding-left: 20px; margin: 0; }
 
@@ -202,7 +117,7 @@
 
     <div id="history-box" style="margin-top: 25px; text-align: left; display: none;">
         <div class="history-header">
-            <h4 style="color: var(--peach-color); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; margin: 0;">Recent History (Last 5)</h4>
+            <h4 style="color: var(--peach-color); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; margin: 0;">Recent History</h4>
             <button class="clear-btn" onclick="clearAllHistory()">Clear All</button>
         </div>
         <div id="history-list"></div>
@@ -227,19 +142,30 @@
     </footer>
 </div>
 
+<div id="toast">Message here...</div>
+
 <script>
-    window.onload = function() {
-        displayHistory();
-    };
+    window.onload = function() { displayHistory(); };
+
+    function showToast(msg) {
+        const x = document.getElementById("toast");
+        x.innerText = msg;
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+    // 🛡️ URL Validation
+    function isValidUrl(url) {
+        const allowed = ["learn.microsoft.com", "developer.microsoft.com", "azure.microsoft.com"];
+        return allowed.some(domain => url.includes(domain));
+    }
 
     function generateLink() {
         const id = document.getElementById('idInput').value.trim();
         let url = document.getElementById('urlInput').value.trim();
         
-        if (!id || !url) { 
-            alert("Dono boxes bharna zaroori hain!"); 
-            return; 
-        }
+        if (!id || !url) { showToast("⚠️ Dono boxes bharna zaroori hain!"); return; }
+        if (!isValidUrl(url)) { showToast("❌ Sirf Microsoft ke links allow hain!"); return; }
 
         url = url.replace(/\/[a-z]{2}-[a-z]{2}\//i, '/');
         const separator = url.includes('?') ? '&' : '?';
@@ -249,15 +175,10 @@
         document.getElementById('result-box').style.display = 'block';
 
         document.getElementById("qrcode").innerHTML = ""; 
-        new QRCode(document.getElementById("qrcode"), {
-            text: finalUrl,
-            width: 150,
-            height: 150,
-            colorDark : "#000000",
-            colorLight : "#ffffff"
-        });
+        new QRCode(document.getElementById("qrcode"), { text: finalUrl, width: 150, height: 150 });
 
         saveToHistory(finalUrl);
+        showToast("✅ Link Generate Ho Gaya!");
     }
 
     function saveToHistory(newUrl) {
@@ -266,8 +187,7 @@
         const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
         const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
 
-        const newEntry = { url: newUrl, date: dateStr, time: timeStr };
-        history.unshift(newEntry);
+        history.unshift({ url: newUrl, date: dateStr, time: timeStr });
         if (history.length > 5) history.pop();
 
         localStorage.setItem("mlsa_history", JSON.stringify(history));
@@ -279,49 +199,54 @@
         const listDiv = document.getElementById("history-list");
         const box = document.getElementById("history-box");
 
-        if (history.length === 0) {
-            box.style.display = "none";
-            return;
-        }
-
+        if (history.length === 0) { box.style.display = "none"; return; }
         box.style.display = "block";
         listDiv.innerHTML = ""; 
 
-        history.forEach((item) => {
+        history.forEach((item, index) => {
             const itemHtml = `
                 <div class="history-item">
                     <div class="history-info">
                         <span class="history-url">${item.url}</span>
                         <span class="history-date">${item.date} | ${item.time}</span>
                     </div>
-                    <button onclick="copySpecific('${item.url}')" style="background:none; border:none; color:#FFDAB9; cursor:pointer;">
-                        <i class="fas fa-copy"></i>
-                    </button>
+                    <div style="display:flex; gap:10px;">
+                        <button onclick="copySpecific('${item.url}')" style="background:none; border:none; color:#FFDAB9; cursor:pointer;"><i class="fas fa-copy"></i></button>
+                        <button onclick="deleteSingle(${index})" style="background:none; border:none; color:#ff4d4d; cursor:pointer;"><i class="fas fa-trash"></i></button>
+                    </div>
                 </div>
             `;
             listDiv.innerHTML += itemHtml;
         });
     }
 
-    // Naya Clear All Function 🧹
+    // 🚮 Individual Delete
+    function deleteSingle(index) {
+        let history = JSON.parse(localStorage.getItem("mlsa_history"));
+        history.splice(index, 1);
+        localStorage.setItem("mlsa_history", JSON.stringify(history));
+        displayHistory();
+        showToast("🗑️ Link Delete Ho Gaya!");
+    }
+
     function clearAllHistory() {
-        if (confirm("Kya aap waqai saari history delete karna chahte hain?")) {
+        if (confirm("Poori history saaf karein?")) {
             localStorage.removeItem("mlsa_history");
             displayHistory();
+            showToast("🧹 History Clear!");
         }
     }
 
     function copySpecific(text) {
         navigator.clipboard.writeText(text);
-        alert("History link copied!");
+        showToast("📋 Link Copied!");
     }
 
     function copyLink() {
         const linkText = document.getElementById('finalLink').innerText;
         navigator.clipboard.writeText(linkText);
-        alert("Link Copy Ho Gaya!");
+        showToast("📋 URL Copied!");
     }
 </script>
-
 </body>
 </html>
