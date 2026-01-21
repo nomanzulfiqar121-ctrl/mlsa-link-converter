@@ -109,6 +109,21 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
+        /* History Styling 📜 */
+        .history-item {
+            background: #121416;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 3px solid #0078d4;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .history-info { text-align: left; flex-grow: 1; margin-right: 10px; overflow: hidden; }
+        .history-date { font-size: 10px; color: #8892b0; display: block; }
+        .history-url { font-size: 11px; color: #00c2ff; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; display: block; }
+
         .links-section {
             margin-top: 30px;
             text-align: left;
@@ -121,12 +136,12 @@
 
         footer { margin-top: 30px; border-top: 1px solid #33383e; padding-top: 20px; }
         
-        /* White color for the credit text ⚪ */
         .dev-credit { 
             color: #ffffff; 
             font-size: 11px; 
             margin-bottom: 10px; 
             letter-spacing: 1px; 
+            font-weight: bold;
         }
         
         .social-links a { color: #8892b0; text-decoration: none; font-size: 12px; font-weight: bold; display: block; margin-top: 10px; }
@@ -169,6 +184,12 @@
         <button onclick="copyLink()" style="background:#fff; color:#000; border:none; padding:10px 25px; border-radius:8px; cursor:pointer; font-weight:bold; margin-top: 10px;">COPY URL</button>
     </div>
 
+    <div id="history-box" style="margin-top: 25px; text-align: left; display: none;">
+        <h4 style="color: #8892b0; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 15px;">Recent History (Last 5)</h4>
+        <div id="history-list">
+            </div>
+    </div>
+
     <div class="links-section">
         <h4>Eligible Reference URLs</h4>
         <ul>
@@ -189,6 +210,11 @@
 </div>
 
 <script>
+    // Page load hote hi history dikhane ke liye
+    window.onload = function() {
+        displayHistory();
+    };
+
     function generateLink() {
         const id = document.getElementById('idInput').value.trim();
         let url = document.getElementById('urlInput').value.trim();
@@ -198,16 +224,14 @@
             return; 
         }
 
-        // Locale remove karne ka logic
         url = url.replace(/\/[a-z]{2}-[a-z]{2}\//i, '/');
-        
         const separator = url.includes('?') ? '&' : '?';
         const finalUrl = `${url}${separator}wt.mc_id=studentamb_${id}`;
         
         document.getElementById('finalLink').innerText = finalUrl;
         document.getElementById('result-box').style.display = 'block';
 
-        // QR Code generate karne ka logic
+        // QR Code
         document.getElementById("qrcode").innerHTML = ""; 
         new QRCode(document.getElementById("qrcode"), {
             text: finalUrl,
@@ -216,6 +240,62 @@
             colorDark : "#000000",
             colorLight : "#ffffff"
         });
+
+        // --- History Save Logic ---
+        saveToHistory(finalUrl);
+    }
+
+    function saveToHistory(newUrl) {
+        let history = JSON.parse(localStorage.getItem("mlsa_history")) || [];
+        
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+        const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+        const newEntry = { url: newUrl, date: dateStr, time: timeStr };
+
+        // Naya link shuru mein add karein
+        history.unshift(newEntry);
+
+        // Sirf 5 links rakhein
+        if (history.length > 5) history.pop();
+
+        localStorage.setItem("mlsa_history", JSON.stringify(history));
+        displayHistory();
+    }
+
+    function displayHistory() {
+        const history = JSON.parse(localStorage.getItem("mlsa_history")) || [];
+        const listDiv = document.getElementById("history-list");
+        const box = document.getElementById("history-box");
+
+        if (history.length === 0) {
+            box.style.display = "none";
+            return;
+        }
+
+        box.style.display = "block";
+        listDiv.innerHTML = ""; // Purani list saaf karein
+
+        history.forEach((item) => {
+            const itemHtml = `
+                <div class="history-item">
+                    <div class="history-info">
+                        <span class="history-url">${item.url}</span>
+                        <span class="history-date">${item.date} | ${item.time}</span>
+                    </div>
+                    <button onclick="copySpecific('${item.url}')" style="background:none; border:none; color:#8892b0; cursor:pointer;">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            `;
+            listDiv.innerHTML += itemHtml;
+        });
+    }
+
+    function copySpecific(text) {
+        navigator.clipboard.writeText(text);
+        alert("History link copied!");
     }
 
     function copyLink() {
