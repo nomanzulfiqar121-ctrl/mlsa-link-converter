@@ -14,7 +14,7 @@
             --bg-color: #1a1c1e; 
             --card-color: #25282c; 
             --input-bg: #121416;
-            --peach-color: #FFDAB9; /* Naya Peach Color 🍑 */
+            --peach-color: #FFDAB9; 
         }
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -110,13 +110,12 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        /* Updated History Styling 📜 */
         .history-item {
             background: #121416;
             padding: 12px;
             border-radius: 10px;
             margin-bottom: 10px;
-            border-left: 3px solid var(--peach-color); /* Peach Border 🍑 */
+            border-left: 3px solid var(--peach-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -125,11 +124,29 @@
         .history-date { font-size: 10px; color: #8892b0; display: block; }
         .history-url { 
             font-size: 11px; 
-            color: #ffffff !important; /* White URL ⚪ */
+            color: #ffffff !important; 
             overflow: hidden; 
             white-space: nowrap; 
             text-overflow: ellipsis; 
             display: block; 
+        }
+
+        /* History Header Flexbox 📐 */
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .clear-btn {
+            background: none;
+            border: none;
+            color: #ff4d4d;
+            font-size: 10px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
         }
 
         .links-section {
@@ -143,17 +160,8 @@
         .links-section ul { color: #666; padding-left: 20px; margin: 0; }
 
         footer { margin-top: 30px; border-top: 1px solid #33383e; padding-top: 20px; }
-        
-        .dev-credit { 
-            color: #ffffff; 
-            font-size: 11px; 
-            margin-bottom: 10px; 
-            letter-spacing: 1px; 
-            font-weight: bold;
-        }
-        
+        .dev-credit { color: #ffffff; font-size: 11px; margin-bottom: 10px; letter-spacing: 1px; font-weight: bold; }
         .social-links a { color: #8892b0; text-decoration: none; font-size: 12px; font-weight: bold; display: block; margin-top: 10px; }
-        .social-links a:hover { color: #0078d4; }
     </style>
 </head>
 <body>
@@ -193,9 +201,11 @@
     </div>
 
     <div id="history-box" style="margin-top: 25px; text-align: left; display: none;">
-        <h4 style="color: var(--peach-color); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 15px;">Recent History (Last 5)</h4>
-        <div id="history-list">
-            </div>
+        <div class="history-header">
+            <h4 style="color: var(--peach-color); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; margin: 0;">Recent History (Last 5)</h4>
+            <button class="clear-btn" onclick="clearAllHistory()">Clear All</button>
+        </div>
+        <div id="history-list"></div>
     </div>
 
     <div class="links-section">
@@ -291,6 +301,14 @@
             `;
             listDiv.innerHTML += itemHtml;
         });
+    }
+
+    // Naya Clear All Function 🧹
+    function clearAllHistory() {
+        if (confirm("Kya aap waqai saari history delete karna chahte hain?")) {
+            localStorage.removeItem("mlsa_history");
+            displayHistory();
+        }
     }
 
     function copySpecific(text) {
