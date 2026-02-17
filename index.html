@@ -243,7 +243,9 @@
         let url = document.getElementById('urlInput').value.trim();
         if (!id || !url) { showToast("⚠️ Fill both fields!"); return; }
 
-        url = url.replace(/\/([a-z]{2}-[a-z]{2})\//i, '/');
+        // 💡 Locale (jaise en-us) hatane ke liye updated Regex
+        url = url.replace(/\/[a-z]{2}-[a-z]{2}\//i, '/');
+
         const finalUrl = `${url}${url.includes('?') ? '&' : '?'}wt.mc_id=studentamb_${id}`;
         
         document.getElementById('finalLink').innerText = finalUrl;
@@ -283,7 +285,6 @@
         showToast("📋 Link Copied!");
     }
 
-    // Confirmation Logic for Single Delete 🛡️
     function deleteSingle(i) {
         if (confirm("Are you sure you want to delete this link from history?")) {
             let h = JSON.parse(localStorage.getItem("mlsa_history"));
@@ -294,7 +295,6 @@
         }
     }
 
-    // Confirmation Logic for Clear All 🛡️
     function clearAllHistory() {
         if (confirm("Are you sure you want to clear all history? This cannot be undone.")) {
             localStorage.removeItem("mlsa_history");
