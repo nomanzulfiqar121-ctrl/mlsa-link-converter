@@ -243,8 +243,8 @@
         let url = document.getElementById('urlInput').value.trim();
         if (!id || !url) { showToast("⚠️ Fill both fields!"); return; }
 
-        // 💡 Locale (jaise en-us) hatane ke liye updated Regex
-        url = url.replace(/\/[a-z]{2}-[a-z]{2}\//i, '/');
+        // 💡 Naya universal regex jo /en/, /en-us/, ya /fr/ sbko remove karega
+        url = url.replace(/\/[a-z]{2}(-[a-z]{2})?\//i, '/');
 
         const finalUrl = `${url}${url.includes('?') ? '&' : '?'}wt.mc_id=studentamb_${id}`;
         
