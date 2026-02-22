@@ -19,6 +19,7 @@
             --instruction-bg: #ebf5ff;
             --peach-color: #FFDAB9;
             --copy-btn-bg: #000000;
+            --reference-bg: #fff9c4; /* Yellow color variable 🎨 */
         }
 
         .dark-mode {
@@ -30,6 +31,7 @@
             --border-color: #33383e;
             --instruction-bg: rgba(0, 120, 212, 0.1);
             --copy-btn-bg: #0078d4;
+            --reference-bg: rgba(255, 235, 59, 0.1); /* Dark mode yellow glow 🌙 */
         }
 
         body {
@@ -104,9 +106,19 @@
         .history-url { font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 65%; text-align: left; }
         .history-actions { display: flex; gap: 10px; }
         
-        .links-section { margin-top: 30px; text-align: left; width: 100%; border-top: 1px solid var(--border-color); padding-top: 20px; }
-        .links-section h4 { font-size: 11px; color: #8892b0; margin-bottom: 10px; }
-        .links-section ul { font-size: 13px; color: #8892b0; padding-left: 18px; }
+        /* Updated Section for Yellow Box 🌟 */
+        .links-section { 
+            background: var(--reference-bg); 
+            border-radius: 15px; 
+            padding: 20px; 
+            text-align: left; 
+            margin-top: 30px; 
+            width: 100%; 
+            box-sizing: border-box; 
+        }
+        .links-section h4 { font-size: 15px; color: #fbc02d; margin: 0 0 10px 0; }
+        .links-section ul { font-size: 13px; color: #666; padding-left: 18px; margin: 0; }
+        .dark-mode .links-section ul { color: #8892b0; }
 
         footer { margin-top: 35px; width: 100%; border-top: 1px solid var(--border-color); padding-top: 20px; }
         .dev-credit { font-size: 12px; font-weight: bold; color: var(--text-color); margin-bottom: 12px; }
@@ -243,7 +255,7 @@
         let url = document.getElementById('urlInput').value.trim();
         if (!id || !url) { showToast("⚠️ Fill both fields!"); return; }
 
-        // 💡 Naya universal regex jo link ke kisi bhi hisse se /en/ ya /en-us/ hatayega
+        // Universal locale removal logic 🧹
         url = url.replace(/\/(?:[a-z]{2}|[a-z]{2}-[a-z]{2})(?=\/|$)/gi, '');
 
         const finalUrl = `${url}${url.includes('?') ? '&' : '?'}wt.mc_id=studentamb_${id}`;
