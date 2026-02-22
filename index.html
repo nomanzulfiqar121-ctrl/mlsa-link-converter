@@ -19,7 +19,8 @@
             --instruction-bg: #ebf5ff;
             --peach-color: #FFDAB9;
             --copy-btn-bg: #000000;
-            --reference-bg: #fff9c4; /* Yellow color variable 🎨 */
+            --reference-bg: #fff9c4;
+            --history-bg: #fce4ec; /* Light Pink for History 🌸 */
         }
 
         .dark-mode {
@@ -31,7 +32,8 @@
             --border-color: #33383e;
             --instruction-bg: rgba(0, 120, 212, 0.1);
             --copy-btn-bg: #0078d4;
-            --reference-bg: rgba(255, 235, 59, 0.1); /* Dark mode yellow glow 🌙 */
+            --reference-bg: rgba(255, 235, 59, 0.1);
+            --history-bg: rgba(240, 98, 146, 0.1); /* Dark mode pink glow 🌙 */
         }
 
         body {
@@ -81,44 +83,36 @@
         .arabic-style { font-family: 'Great Vibes', cursive; font-size: 85px; line-height: 1; color: var(--text-color); }
         .english-name { font-family: 'Cinzel', serif; font-size: 24px; letter-spacing: 12px; color: #0078d4; font-weight: bold; display: block; margin-top: 5px; }
 
-        .instruction-box {
-            background: var(--instruction-bg); border-radius: 15px; padding: 20px;
-            text-align: left; margin-bottom: 25px; width: 100%; box-sizing: border-box;
+        /* Box Styles */
+        .instruction-box, .links-section, #history-box {
+            border-radius: 15px; padding: 20px; text-align: left; width: 100%; box-sizing: border-box; margin-bottom: 25px;
         }
+
+        .instruction-box { background: var(--instruction-bg); }
         .instruction-box h3 { font-size: 15px; color: #00c2ff; margin: 0 0 10px 0; }
         .instruction-box ol { font-size: 13px; margin: 0; padding-left: 20px; color: #666; }
-        .dark-mode .instruction-box ol { color: #8892b0; }
 
+        .links-section { background: var(--reference-bg); margin-top: 30px; }
+        .links-section h4 { font-size: 15px; color: #fbc02d; margin: 0 0 10px 0; }
+        .links-section ul { font-size: 13px; color: #666; padding-left: 18px; margin: 0; }
+
+        /* Updated History Box Style 🌸 */
+        #history-box { background: var(--history-bg); margin-top: 30px; display: none; }
+        #history-box h4 { font-size: 15px; color: #e91e63; margin: 0; }
+        
         .input-group { text-align: left; margin-bottom: 20px; width: 100%; }
         label { color: #8892b0; font-size: 11px; font-weight: 800; margin-bottom: 8px; display: block; }
         input { width: 100%; padding: 15px; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-color); box-sizing: border-box; }
 
         .btn { width: 100%; padding: 18px; background: var(--btn-bg); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 5px; }
 
-        #result-box .copy-btn {
-            background-color: var(--copy-btn-bg) !important;
-            color: white !important;
-            border: none !important;
-        }
-
         #finalLink { font-size: 12px; word-break: break-all; margin-bottom: 15px; color: #00c2ff; text-align: left; background: var(--input-bg); padding: 10px; border-radius: 8px; }
-        .history-item { background: var(--input-bg); padding: 12px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box; border-left: 4px solid var(--peach-color); }
+        
+        .history-item { background: var(--card-bg); padding: 12px; border-radius: 12px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box; border-left: 4px solid var(--peach-color); }
         .history-url { font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 65%; text-align: left; }
         .history-actions { display: flex; gap: 10px; }
         
-        /* Updated Section for Yellow Box 🌟 */
-        .links-section { 
-            background: var(--reference-bg); 
-            border-radius: 15px; 
-            padding: 20px; 
-            text-align: left; 
-            margin-top: 30px; 
-            width: 100%; 
-            box-sizing: border-box; 
-        }
-        .links-section h4 { font-size: 15px; color: #fbc02d; margin: 0 0 10px 0; }
-        .links-section ul { font-size: 13px; color: #666; padding-left: 18px; margin: 0; }
-        .dark-mode .links-section ul { color: #8892b0; }
+        .dark-mode .instruction-box ol, .dark-mode .links-section ul { color: #8892b0; }
 
         footer { margin-top: 35px; width: 100%; border-top: 1px solid var(--border-color); padding-top: 20px; }
         .dev-credit { font-size: 12px; font-weight: bold; color: var(--text-color); margin-bottom: 12px; }
@@ -181,12 +175,12 @@
     <div id="result-box" style="display:none; margin-top:25px; width: 100%;">
         <div id="finalLink"></div>
         <div id="qrcode" style="display:flex; justify-content:center; margin-bottom:20px;"></div>
-        <button onclick="copyLinkText(document.getElementById('finalLink').innerText)" class="btn copy-btn">COPY URL</button>
+        <button onclick="copyLinkText(document.getElementById('finalLink').innerText)" class="btn">COPY URL</button>
     </div>
 
-    <div id="history-box" style="display:none; margin-top:30px; width: 100%;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-            <h4 style="font-size:11px; color:#8892b0; margin:0;">RECENT HISTORY</h4>
+    <div id="history-box">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h4>RECENT HISTORY</h4>
             <button onclick="clearAllHistory()" style="background:none; border:none; color:#ff4d4d; font-size:10px; cursor:pointer;">CLEAR ALL</button>
         </div>
         <div id="history-list"></div>
@@ -255,9 +249,7 @@
         let url = document.getElementById('urlInput').value.trim();
         if (!id || !url) { showToast("⚠️ Fill both fields!"); return; }
 
-        // Universal locale removal logic 🧹
         url = url.replace(/\/(?:[a-z]{2}|[a-z]{2}-[a-z]{2})(?=\/|$)/gi, '');
-
         const finalUrl = `${url}${url.includes('?') ? '&' : '?'}wt.mc_id=studentamb_${id}`;
         
         document.getElementById('finalLink').innerText = finalUrl;
@@ -280,16 +272,22 @@
 
     function displayHistory() {
         const history = JSON.parse(localStorage.getItem("mlsa_history")) || [];
+        const box = document.getElementById("history-box");
         const list = document.getElementById("history-list");
-        document.getElementById("history-box").style.display = history.length ? "block" : "none";
-        list.innerHTML = history.map((url, i) => `
-            <div class="history-item">
-                <span class="history-url">${url}</span>
-                <div class="history-actions">
-                    <button onclick="copyLinkText('${url}')" style="background:none; border:none; color:#0078d4; cursor:pointer;"><i class="fas fa-copy"></i></button>
-                    <button onclick="deleteSingle(${i})" style="background:none; border:none; color:#ff4d4d; cursor:pointer;"><i class="fas fa-trash"></i></button>
-                </div>
-            </div>`).join('');
+        
+        if (history.length > 0) {
+            box.style.display = "block";
+            list.innerHTML = history.map((url, i) => `
+                <div class="history-item">
+                    <span class="history-url">${url}</span>
+                    <div class="history-actions">
+                        <button onclick="copyLinkText('${url}')" style="background:none; border:none; color:#0078d4; cursor:pointer;"><i class="fas fa-copy"></i></button>
+                        <button onclick="deleteSingle(${i})" style="background:none; border:none; color:#ff4d4d; cursor:pointer;"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>`).join('');
+        } else {
+            box.style.display = "none";
+        }
     }
 
     function copyLinkText(text) {
@@ -298,20 +296,20 @@
     }
 
     function deleteSingle(i) {
-        if (confirm("Are you sure you want to delete this link from history?")) {
+        if (confirm("Delete this link?")) {
             let h = JSON.parse(localStorage.getItem("mlsa_history"));
             h.splice(i, 1);
             localStorage.setItem("mlsa_history", JSON.stringify(h));
             displayHistory();
-            showToast("🗑️ Item Deleted!");
+            showToast("🗑️ Deleted!");
         }
     }
 
     function clearAllHistory() {
-        if (confirm("Are you sure you want to clear all history? This cannot be undone.")) {
+        if (confirm("Clear all history?")) {
             localStorage.removeItem("mlsa_history");
             displayHistory();
-            showToast("🧹 History Cleared!");
+            showToast("🧹 Cleared!");
         }
     }
 
