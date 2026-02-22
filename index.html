@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOMAN | MLSA Converter</title>
-    <link rel="manifest" href="manifest.json">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -19,8 +18,9 @@
             --border-color: #dcdde1;
             --instruction-bg: #ebf5ff;
             --peach-color: #FFDAB9;
+            --copy-btn-bg: #000000;
             --reference-bg: #fff9c4;
-            --history-bg: #fce4ec;
+            --history-bg: #fce4ec; /* Light Pink for History 🌸 */
         }
 
         .dark-mode {
@@ -31,20 +31,47 @@
             --btn-bg: #0078d4;
             --border-color: #33383e;
             --instruction-bg: rgba(0, 120, 212, 0.1);
+            --copy-btn-bg: #0078d4;
             --reference-bg: rgba(255, 235, 59, 0.1);
-            --history-bg: rgba(240, 98, 146, 0.1);
+            --history-bg: rgba(240, 98, 146, 0.1); /* Dark mode pink glow 🌙 */
         }
 
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px 0; display: flex; justify-content: center; background: var(--bg-color); color: var(--text-color); transition: 0.3s; }
-        .card { background: var(--card-bg); padding: 40px 30px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); width: 90%; max-width: 450px; text-align: center; position: relative; display: flex; flex-direction: column; align-items: center; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: 0.3s;
+        }
 
-        /* Icons & Menu */
+        .card {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .menu-container { position: absolute; left: 25px; top: 25px; z-index: 9999; }
-        .menu-dots { background: none; border: none; color: var(--text-color); font-size: 22px; cursor: pointer; }
-        .dropdown-content { display: none; position: absolute; left: 0; top: 35px; background: var(--card-bg); border: 1px solid var(--border-color); padding: 15px; border-radius: 15px; width: 190px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .menu-dots { background: none; border: none; color: var(--text-color); font-size: 22px; cursor: pointer; padding: 5px; }
+        .dropdown-content { 
+            display: none; position: absolute; left: 0; top: 35px; 
+            background: var(--card-bg); border: 1px solid var(--border-color); 
+            padding: 15px; border-radius: 15px; width: 190px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 10000;
+        }
         .menu-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 
-        /* Switches */
         .switch { position: relative; display: inline-block; width: 45px; height: 24px; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
@@ -52,39 +79,45 @@
         input:checked + .slider { background-color: #2196F3; }
         input:checked + .slider:before { transform: translateX(21px); }
 
-        /* Logo Section */
         .logo-section { margin-bottom: 20px; width: 100%; }
         .arabic-style { font-family: 'Great Vibes', cursive; font-size: 85px; line-height: 1; color: var(--text-color); }
         .english-name { font-family: 'Cinzel', serif; font-size: 24px; letter-spacing: 12px; color: #0078d4; font-weight: bold; display: block; margin-top: 5px; }
 
-        /* Boxes */
-        .instruction-box, .links-section, #history-box { border-radius: 15px; padding: 20px; text-align: left; width: 100%; box-sizing: border-box; margin-bottom: 25px; }
+        /* Box Styles */
+        .instruction-box, .links-section, #history-box {
+            border-radius: 15px; padding: 20px; text-align: left; width: 100%; box-sizing: border-box; margin-bottom: 25px;
+        }
+
         .instruction-box { background: var(--instruction-bg); }
         .instruction-box h3 { font-size: 15px; color: #00c2ff; margin: 0 0 10px 0; }
         .instruction-box ol { font-size: 13px; margin: 0; padding-left: 20px; color: #666; }
+
         .links-section { background: var(--reference-bg); margin-top: 30px; }
         .links-section h4 { font-size: 15px; color: #fbc02d; margin: 0 0 10px 0; }
         .links-section ul { font-size: 13px; color: #666; padding-left: 18px; margin: 0; }
-        #history-box { background: var(--history-bg); margin-top: 30px; }
-        #history-box h4 { font-size: 15px; color: #e91e63; margin: 0; }
 
-        /* Inputs 📝 */
+        /* Updated History Box Style 🌸 */
+        #history-box { background: var(--history-bg); margin-top: 30px; display: none; }
+        #history-box h4 { font-size: 15px; color: #e91e63; margin: 0; }
+        
         .input-group { text-align: left; margin-bottom: 20px; width: 100%; }
         label { color: #8892b0; font-size: 11px; font-weight: 800; margin-bottom: 8px; display: block; }
-        input, textarea { 
-            width: 100%; padding: 15px; background: var(--input-bg); border: 1px solid var(--border-color); 
-            border-radius: 12px; color: var(--text-color); box-sizing: border-box; font-family: inherit;
-        }
-        textarea { height: 100px; resize: vertical; } /* Textarea for Batch 🏗️ */
+        input { width: 100%; padding: 15px; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-color); box-sizing: border-box; }
 
-        .btn { width: 100%; padding: 18px; background: var(--btn-bg); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .btn { width: 100%; padding: 18px; background: var(--btn-bg); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 5px; }
 
-        /* Results */
-        .result-item { background: var(--input-bg); padding: 10px; border-radius: 8px; font-size: 12px; word-break: break-all; margin-bottom: 10px; color: #00c2ff; text-align: left; }
-        .history-item { background: var(--card-bg); padding: 12px; border-radius: 12px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(--peach-color); }
-        .history-url { font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 65%; }
+        #finalLink { font-size: 12px; word-break: break-all; margin-bottom: 15px; color: #00c2ff; text-align: left; background: var(--input-bg); padding: 10px; border-radius: 8px; }
+        
+        .history-item { background: var(--card-bg); padding: 12px; border-radius: 12px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box; border-left: 4px solid var(--peach-color); }
+        .history-url { font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 65%; text-align: left; }
+        .history-actions { display: flex; gap: 10px; }
+        
+        .dark-mode .instruction-box ol, .dark-mode .links-section ul { color: #8892b0; }
 
-        footer { margin-top: 35px; width: 100%; border-top: 1px solid var(--border-color); padding-top: 20px; font-size: 12px; }
+        footer { margin-top: 35px; width: 100%; border-top: 1px solid var(--border-color); padding-top: 20px; }
+        .dev-credit { font-size: 12px; font-weight: bold; color: var(--text-color); margin-bottom: 12px; }
+        .social-link { color: #0078d4; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; }
+
         #toast { visibility: hidden; min-width: 200px; background: #333; color: #fff; text-align: center; border-radius: 10px; padding: 15px; position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); z-index: 10001; }
         #toast.show { visibility: visible; animation: fadein 0.5s; }
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 40px; opacity: 1;} }
@@ -96,8 +129,20 @@
     <div class="menu-container">
         <button class="menu-dots" onclick="toggleMenu()"><i class="fas fa-ellipsis-v"></i></button>
         <div id="themeMenu" class="dropdown-content">
-            <div class="menu-item"><span>Light Mode</span><label class="switch"><input type="checkbox" id="lightToggle" onchange="modeManager('light')"><span class="slider"></span></label></div>
-            <div class="menu-item"><span>Dark Mode</span><label class="switch"><input type="checkbox" id="darkToggle" onchange="modeManager('dark')"><span class="slider"></span></label></div>
+            <div class="menu-item">
+                <span>Light Mode</span>
+                <label class="switch">
+                    <input type="checkbox" id="lightToggle" onchange="modeManager('light')">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="menu-item">
+                <span>Dark Mode</span>
+                <label class="switch">
+                    <input type="checkbox" id="darkToggle" onchange="modeManager('dark')">
+                    <span class="slider"></span>
+                </label>
+            </div>
         </div>
     </div>
 
@@ -108,43 +153,51 @@
 
     <div class="instruction-box">
         <h3>How to use:</h3>
-        <ol><li>Paste one or multiple URLs (one per line).</li><li>Enter your 6-digit ID.</li><li>Convert all at once!</li></ol>
+        <ol>
+            <li>Paste your URL here.</li>
+            <li>Enter your 6-digit Contributor ID.</li>
+            <li>Convert and share your link!</li>
+        </ol>
     </div>
 
     <div class="input-group">
         <label>YOUR CONTRIBUTOR ID</label>
-        <input type="text" id="idInput" placeholder="e.g. 502891">
+        <input type="text" id="idInput" placeholder="Enter ID (e.g. 502891)">
     </div>
 
     <div class="input-group">
-        <label>MICROSOFT LEARN LINKS (BATCH)</label>
-        <textarea id="urlInput" placeholder="Paste links here...&#10;One link per line"></textarea>
+        <label>MICROSOFT LEARN LINK</label>
+        <input type="text" id="urlInput" placeholder="Paste link here...">
     </div>
     
-    <button class="btn" onclick="generateBatchLinks()">Create My Links</button>
+    <button class="btn" onclick="generateLink()">Create My Link</button>
 
     <div id="result-box" style="display:none; margin-top:25px; width: 100%;">
-        <div id="result-list"></div>
-        <div id="qrcode" style="display:flex; justify-content:center; margin: 20px 0;"></div>
-        <button onclick="copyAllResults()" class="btn">COPY ALL LINKS</button>
+        <div id="finalLink"></div>
+        <div id="qrcode" style="display:flex; justify-content:center; margin-bottom:20px;"></div>
+        <button onclick="copyLinkText(document.getElementById('finalLink').innerText)" class="btn">COPY URL</button>
     </div>
 
-    <div id="history-box" style="display:none;">
+    <div id="history-box">
         <div style="display:flex; justify-content:space-between; align-items:center;">
             <h4>RECENT HISTORY</h4>
-            <button onclick="clearHistory()" style="background:none; border:none; color:#ff4d4d; font-size:10px; cursor:pointer;">CLEAR ALL</button>
+            <button onclick="clearAllHistory()" style="background:none; border:none; color:#ff4d4d; font-size:10px; cursor:pointer;">CLEAR ALL</button>
         </div>
         <div id="history-list"></div>
     </div>
 
     <div class="links-section">
         <h4>ELIGIBLE REFERENCE URLS</h4>
-        <ul><li>learn.microsoft.com</li><li>developer.microsoft.com</li><li>azure.microsoft.com</li></ul>
+        <ul>
+            <li>learn.microsoft.com</li>
+            <li>developer.microsoft.com</li>
+            <li>azure.microsoft.com</li>
+        </ul>
     </div>
 
     <footer>
-        <strong>Designed and Developed by Noman Zulfiqar</strong><br><br>
-        <a href="https://www.linkedin.com/in/noman-zulfiqar-0916833a4" target="_blank" style="color:#0078d4; text-decoration:none;">
+        <div class="dev-credit">Designed and Developed by Noman Zulfiqar</div>
+        <a href="https://www.linkedin.com/in/noman-zulfiqar-0916833a4" target="_blank" class="social-link">
             <i class="fab fa-linkedin"></i> CONNECT ON LINKEDIN
         </a>
     </footer>
@@ -153,120 +206,114 @@
 <div id="toast"></div>
 
 <script>
-    // PWA Service Worker Registration 📲
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW failed', err));
-        });
-    }
-
     function toggleMenu() {
-        const m = document.getElementById('themeMenu');
-        m.style.display = (m.style.display === 'block') ? 'none' : 'block';
+        const menu = document.getElementById('themeMenu');
+        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
     }
 
-    function modeManager(mode) {
-        const b = document.body;
-        if (mode === 'light') {
-            document.getElementById('darkToggle').checked = false;
-            b.classList.remove('dark-mode');
+    function modeManager(selected) {
+        const body = document.body;
+        const light = document.getElementById('lightToggle');
+        const dark = document.getElementById('darkToggle');
+
+        if (selected === 'light') {
+            dark.checked = false;
+            body.classList.remove('dark-mode');
             localStorage.setItem('theme', 'light');
         } else {
-            document.getElementById('lightToggle').checked = false;
-            b.classList.add('dark-mode');
+            light.checked = false;
+            body.classList.add('dark-mode');
             localStorage.setItem('theme', 'dark');
         }
     }
 
-    window.onload = () => {
-        if(localStorage.getItem('theme') === 'dark') {
+    window.onload = function() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if(savedTheme === 'dark') {
             document.body.classList.add('dark-mode');
             document.getElementById('darkToggle').checked = true;
-        } else { document.getElementById('lightToggle').checked = true; }
+        } else {
+            document.getElementById('lightToggle').checked = true;
+        }
         displayHistory();
     };
 
     function showToast(msg) {
         const x = document.getElementById("toast");
         x.innerText = msg; x.className = "show";
-        setTimeout(() => x.className = "", 3000);
+        setTimeout(() => { x.className = ""; }, 3000);
     }
 
-    // Batch Logic 🏗️
-    function generateBatchLinks() {
+    function generateLink() {
         const id = document.getElementById('idInput').value.trim();
-        const rawUrls = document.getElementById('urlInput').value.trim().split('\n');
-        if (!id || !rawUrls[0]) { showToast("⚠️ Provide ID and Links!"); return; }
+        let url = document.getElementById('urlInput').value.trim();
+        if (!id || !url) { showToast("⚠️ Fill both fields!"); return; }
 
-        let resultsHTML = "";
-        let finalUrls = [];
-
-        rawUrls.forEach(url => {
-            let cleanUrl = url.trim();
-            if (cleanUrl) {
-                // Locale removal
-                cleanUrl = cleanUrl.replace(/\/(?:[a-z]{2}|[a-z]{2}-[a-z]{2})(?=\/|$)/gi, '');
-                const final = `${cleanUrl}${cleanUrl.includes('?') ? '&' : '?'}wt.mc_id=studentamb_${id}`;
-                resultsHTML += `<div class="result-item">${final}</div>`;
-                finalUrls.push(final);
-                saveToHistory(final);
-            }
-        });
-
-        document.getElementById('result-list').innerHTML = resultsHTML;
+        url = url.replace(/\/(?:[a-z]{2}|[a-z]{2}-[a-z]{2})(?=\/|$)/gi, '');
+        const finalUrl = `${url}${url.includes('?') ? '&' : '?'}wt.mc_id=studentamb_${id}`;
+        
+        document.getElementById('finalLink').innerText = finalUrl;
         document.getElementById('result-box').style.display = 'block';
+        document.getElementById("qrcode").innerHTML = ""; 
+        new QRCode(document.getElementById("qrcode"), { text: finalUrl, width: 140, height: 140 });
         
-        // QR Code for the first link in batch
-        document.getElementById("qrcode").innerHTML = "";
-        new QRCode(document.getElementById("qrcode"), { text: finalUrls[0], width: 120, height: 120 });
-        
-        showToast(`✅ Generated ${finalUrls.length} links!`);
+        saveToHistory(finalUrl);
+        showToast("✅ Generated!");
     }
 
     function saveToHistory(url) {
-        let h = JSON.parse(localStorage.getItem("mlsa_history")) || [];
-        if (!h.includes(url)) {
-            h.unshift(url);
-            localStorage.setItem("mlsa_history", JSON.stringify(h.slice(0, 5)));
+        let history = JSON.parse(localStorage.getItem("mlsa_history")) || [];
+        if (!history.includes(url)) {
+            history.unshift(url);
+            localStorage.setItem("mlsa_history", JSON.stringify(history.slice(0, 5)));
             displayHistory();
         }
     }
 
     function displayHistory() {
-        const h = JSON.parse(localStorage.getItem("mlsa_history")) || [];
+        const history = JSON.parse(localStorage.getItem("mlsa_history")) || [];
         const box = document.getElementById("history-box");
         const list = document.getElementById("history-list");
-        box.style.display = h.length ? "block" : "none";
-        list.innerHTML = h.map((url, i) => `
-            <div class="history-item">
-                <span class="history-url">${url}</span>
-                <div>
-                    <i class="fas fa-copy" onclick="copyText('${url}')" style="color:#0078d4; cursor:pointer; margin-right:10px;"></i>
-                    <i class="fas fa-trash" onclick="deleteItem(${i})" style="color:#ff4d4d; cursor:pointer;"></i>
-                </div>
-            </div>`).join('');
+        
+        if (history.length > 0) {
+            box.style.display = "block";
+            list.innerHTML = history.map((url, i) => `
+                <div class="history-item">
+                    <span class="history-url">${url}</span>
+                    <div class="history-actions">
+                        <button onclick="copyLinkText('${url}')" style="background:none; border:none; color:#0078d4; cursor:pointer;"><i class="fas fa-copy"></i></button>
+                        <button onclick="deleteSingle(${i})" style="background:none; border:none; color:#ff4d4d; cursor:pointer;"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>`).join('');
+        } else {
+            box.style.display = "none";
+        }
     }
 
-    function copyText(t) { navigator.clipboard.writeText(t); showToast("📋 Copied!"); }
-    
-    function copyAllResults() {
-        const links = Array.from(document.querySelectorAll('.result-item')).map(div => div.innerText).join('\n');
-        copyText(links);
+    function copyLinkText(text) {
+        navigator.clipboard.writeText(text);
+        showToast("📋 Link Copied!");
     }
 
-    function deleteItem(i) {
-        let h = JSON.parse(localStorage.getItem("mlsa_history"));
-        h.splice(i, 1);
-        localStorage.setItem("mlsa_history", JSON.stringify(h));
-        displayHistory();
+    function deleteSingle(i) {
+        if (confirm("Delete this link?")) {
+            let h = JSON.parse(localStorage.getItem("mlsa_history"));
+            h.splice(i, 1);
+            localStorage.setItem("mlsa_history", JSON.stringify(h));
+            displayHistory();
+            showToast("🗑️ Deleted!");
+        }
     }
 
-    function clearHistory() {
-        localStorage.removeItem("mlsa_history");
-        displayHistory();
+    function clearAllHistory() {
+        if (confirm("Clear all history?")) {
+            localStorage.removeItem("mlsa_history");
+            displayHistory();
+            showToast("🧹 Cleared!");
+        }
     }
 
-    window.onclick = (e) => {
+    window.onclick = function(e) {
         if (!e.target.matches('.menu-dots') && !e.target.closest('.dropdown-content')) {
             document.getElementById('themeMenu').style.display = 'none';
         }
